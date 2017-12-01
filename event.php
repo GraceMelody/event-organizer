@@ -55,7 +55,7 @@
             <div class="col-md-9">
              <div class="form-group">
                <label for="wilayah">Wilayah:</label>
-               <select class="form-control" id="nama">
+               <select class="form-control" id="wilayah">
                  <option>Malang</option>
                </select>
 

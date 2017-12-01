@@ -5,10 +5,10 @@
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
-                 <li class="active inner"><a href="event.php">Event</a></li>
+                 <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
                  <li><a href="posisi.php">Posisi</a></li>
-                 <li><a href="personal.php">Personal</a></li>
+                 <li class="active inner"><a href="personal.php">Personal</a></li>
                </ul>
              </li>
               <li><a href="entry-honor.php">Entry Honor</a></li>
@@ -23,15 +23,16 @@
     <div class="row">
       <div class="col-xs-11">
       <h4>Welcome, testUser</h4>
-        <h1>Event</h1>
+        <h1>Personal</h1>
 
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="active">
-           <th>No <span class="glyphicon glyphicon-sort"></th>
-           <th>Wilayah<span class="glyphicon glyphicon-sort"></th>
-           <th>Event<span class="glyphicon glyphicon-sort"></th>
-           <th>Hari<span class="glyphicon glyphicon-sort"></th>
+           <th>NIP <span class="glyphicon glyphicon-sort"></th>
+           <th>Nama<span class="glyphicon glyphicon-sort"></th>
+           <th>Bagian<span class="glyphicon glyphicon-sort"></th>
+           <th>No. Rek<span class="glyphicon glyphicon-sort"></th>
+           <th>Koordinator <span class="glyphicon glyphicon-sort"></th>
            <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
@@ -54,8 +55,12 @@
 
             <div class="col-md-9">
              <div class="form-group">
+               <label for="nip">NIP:</label>
+                <input type="text" class="form-control" id="nip">
+                <label for="nama">Nama:</label>
+                 <input type="text" class="form-control" id="nama">
                <label for="wilayah">Wilayah:</label>
-               <select class="form-control" id="nama">
+               <select class="form-control" id="wilayah">
                  <option>Malang</option>
                </select>
 
