@@ -4,10 +4,10 @@
                 <ul class="nav padder">
 
 
-                 <li class="active inner"><a href="wilayah.php">Wilayah</a></li>
+                 <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
-                 <li><a href="posisi.php">Posisi</a></li>
+                 <li class="active inner"><a href="posisi.php">Posisi</a></li>
                  <li><a href="personal.php">Personal</a></li>
                </ul>
              </li>
@@ -31,13 +31,17 @@
          <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
-           <th>Aktif</th>
+           <th>Bagian <span class="glyphicon glyphicon-sort"></th>
+           <th>Rp. <span class="glyphicon glyphicon-sort"></th>
+           <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
        <tbody>
          <tr>
-           <td>John</td>
-           <td>Doe</td>
+           <td>1.</td>
+           <td>Vokalis</td>
+           <td>Musik</td>
+           <td>50K</td>
            <td><div class="checkbox">
   <label><input type="checkbox" value=""></label>
 </div></td>
@@ -51,9 +55,14 @@
          <div class="col-md-11">
           <div class="form-group">
 
-            <label for="nama-wil">Nama:</label>
-            <input type="text" class="form-control" id="nama-wil">
-
+            <label for="nama-pos">Nama:</label>
+            <input type="text" class="form-control" id="nama-pos">
+            <label for="bagian">Bagian:</label>
+            <select class="form-control" id="bagian">
+              <option>Transportasi</option>
+            </select>
+            <label for="rp">Rp:</label>
+            <input type="text" class="form-control" id="rp">
             </div>
             </div>
             <div class="col-md-2">
