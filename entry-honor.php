@@ -118,9 +118,14 @@
     <option disabled selected>---</option>
     <?php
     while ($stmt->fetch()) {
+      $isSelected = '';
+      if(isset($_GET['id_wilayah'])) {
+        $isSelected = $_GET['id_wilayah'] == $id ? 'selected' : '';
+      }
+      
       ?>
       
-      <option value="<?php echo $id ?>"><?php echo $nama_wilayah ?></option>
+      <option value="<?php echo $id ?>" <?php echo $isSelected ?>><?php echo $nama_wilayah ?></option>
       
       <?php
     }
