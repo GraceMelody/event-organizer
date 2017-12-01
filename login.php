@@ -34,7 +34,7 @@
   </div>
   <form>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
       <label for="username">Username:</label>
       <input type="username" class="form-control" id="username">
@@ -43,7 +43,7 @@
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd">
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">Login</button>
   </form>
 </div>
 </div>
