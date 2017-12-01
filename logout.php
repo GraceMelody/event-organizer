@@ -1,4 +1,5 @@
-<?php require("php_header.php")?>
+<?php require("php_header.php") ?>
+<?php $_SESSION['loggedin']=1?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,25 +27,7 @@
   </script>
 </head>
 <body>
-
-<div class="container">
-  <div class="text-center">
-    <h1>Event Organizer Management System</h1>
-    <h4>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h4>
-  </div>
-  <form>
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-    <div class="form-group ">
-      <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd">
-    </div>
-    <button type="submit" class="btn btn-default">Login</button>
-  </form>
+<div class="text-center">
+  <h1>Anda telah Logout.</h1>
+  <a href="login.php" class="btn btn-primary">Kembali ke Halaman Login</a>
 </div>
-</div>
-</body>
