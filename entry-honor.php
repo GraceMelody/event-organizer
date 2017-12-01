@@ -29,25 +29,29 @@
   function populateTable() {
     require('db.php');
     
-    if (isset($_GET['id_wilayah'])) {
+    if (isset($_GET['id_wilayah']) && isset($_GET['id_event'])) {
       $query = "SELECT 
                   honor.id,
-                  personal.nama
+                  personal.nama,
+                  posisi.nama
                   FROM honor
                   INNER JOIN personal
                   ON honor.id_personal=personal.nip
                   INNER JOIN event
                   ON id_event=event.id
-                  WHERE id_wilayah=?";
+                  INNER JOIN posisi
+                  ON id_posisi=posisi.id
+                  WHERE id_wilayah=?
+                  AND id_event=?
+                  ";
       $stmt = $db->prepare($query) or die($db->error);
-      $stmt->bind_param('i',$_GET['id_wilayah']);
+      $stmt->bind_param('ii',$_GET['id_wilayah'], $_GET['id_event']);
     } else {
-      $query = "SELECT honor.id, personal.nama FROM honor INNER JOIN personal ON honor.id_personal=personal.nip";
-      $stmt = $db->prepare($query) or die($db->error);
+      return;
     }
     
     $stmt->execute();
-    $stmt->bind_result($id, $nama_personal);
+    $stmt->bind_result($id, $nama_personal, $posisi);
 
     while ($stmt->fetch()) {
     ?>
@@ -133,21 +137,25 @@
   
   function populateOptionEvent() {
     require('db.php');
-    $query = "SELECT id, nama FROM event WHERE aktif = 1";
+    
+    
+    ?>
+    <option disabled selected>---</option>
+    <?php
+    
+    if (!isset($_GET['id_wilayah'])) {
+      return;
+    }
+    
+    $query = "SELECT id, nama FROM event WHERE aktif = 1 AND id_wilayah = ".$_GET['id_wilayah'];
     $stmt = $db->prepare($query);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
-
+    
+    
     while ($stmt->fetch()) {
-      $isSelected = '';
-      if(isset($_GET['id_wilayah'])) {
+      
         $isSelected = $_GET['id_event'] == $id ? 'selected' : '';
-      } else {
-        ?>
-        <option disabled selected>---</option>
-        <?php
-        return;
-      }
       
       
       ?>
