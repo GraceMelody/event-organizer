@@ -1,4 +1,4 @@
-<?php require('header.php')?>
+<?php require('header.php') ?>
               <li class="active">
                 <a href="#">Data Master</a>
                 <ul class="nav padder">
@@ -13,7 +13,8 @@
              </li>
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
-
+              <li><a href="#">Pembelian</a></li>
+              <li><a href="#">Evaluasi</a></li>
             </ul>
         </div>
       </div>
@@ -23,7 +24,7 @@
     <div class="row">
       <div class="col-xs-11">
       <h4>Welcome, testUser</h4>
-        <h1>Wilayah</h1>
+        <h1>Posisi</h1>
 
         <table class="table table-hover tablesorter">
        <thead>
