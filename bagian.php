@@ -3,22 +3,22 @@
 <?php
   if (isset($_POST['submit'])) {
     // Tambah wilayah
-    
+
     $query = "INSERT INTO bagian (nama, aktif) VALUES (?, ?)";
-    
+
     $stmt = $db->prepare($query);
     $true_bool = true;
     $stmt->bind_param("si", $_POST['nama_bagian'], $true_bool);
     $stmt->execute();
   }
-  
+
   function populateTable() {
     require('db.php');
     $query = "SELECT id, nama, aktif FROM bagian";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $aktif);
-    
+
     while ($stmt->fetch()) {
     ?>
        <tr>
@@ -52,8 +52,7 @@
              </li>
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
-              <li><a href="#">Pembelian</a></li>
-              <li><a href="#">Evaluasi</a></li>
+
             </ul>
         </div>
       </div>

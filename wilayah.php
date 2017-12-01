@@ -3,22 +3,22 @@
 <?php
   if (isset($_POST['submit'])) {
     // Tambah wilayah
-    
+
     $query = "INSERT INTO wilayah (nama, aktif) VALUES (?, ?)";
-    
+
     $stmt = $db->prepare($query);
     $true_bool = true;
     $stmt->bind_param("si", $_POST['nama_wilayah'], $true_bool);
     $stmt->execute();
   }
-  
+
   function populateTable() {
     require('db.php');
     $query = "SELECT id, nama, aktif FROM wilayah";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $aktif);
-    
+
     while ($stmt->fetch()) {
     ?>
        <tr>
