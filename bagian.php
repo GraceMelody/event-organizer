@@ -37,30 +37,22 @@
        <tbody>
          <tr>
            <td>1.</td>
-           <td>Vokalis</td>
            <td>Musik</td>
-           <td>50K</td>
            <td><div class="checkbox">
-  <label><input type="checkbox" value=""></label>
-</div></td>
+              <label><input type="checkbox" value=""></label>
+        </div></td>
          </tr>
        </tbody>
      </table>
 
-<div class="row">
-<h2>Data baru</h2>
+     <div class="row">
+       <h2>Data baru</h2>
        <form>
          <div class="col-md-11">
           <div class="form-group">
 
-            <label for="nama-pos">Nama:</label>
-            <input type="text" class="form-control" id="nama-pos">
-            <label for="bagian">Bagian:</label>
-            <select class="form-control" id="bagian">
-              <option>Transportasi</option>
-            </select>
-            <label for="rp">Rp:</label>
-            <input type="text" class="form-control" id="rp">
+            <label for="nama-bag">Nama bagian:</label>
+            <input type="text" class="form-control" id="nama-bag">
             </div>
             </div>
             <div class="col-md-2">
