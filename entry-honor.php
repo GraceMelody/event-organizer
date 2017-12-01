@@ -7,7 +7,7 @@
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
-                 <li><a href="posisi.php">posisi</a></li>
+                 <li><a href="posisi.php">Posisi</a></li>
                  <li><a href="personal.php">Personal</a></li>
                </ul>
              </li>
