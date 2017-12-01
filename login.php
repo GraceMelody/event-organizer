@@ -1,4 +1,19 @@
 <?php require("php_header.php")?>
+<?php
+if (isset($_SESSION['username'])) {
+  header("Location: wilayah.php");
+} else {
+  if (isset($_POST['submit'])) {
+    $_SESSION['username'] = $_POST['username'];
+    $query = "SELECT * FROM user WHERE username = ? AND password = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("ss",$_POST['username'], $_POST['pwd']);
+    $stmt->execute();
+    $result = mysqli_query($db, $query);
+    $r=mysqli_num_rows($result);
+  }
+}
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,11 +52,11 @@
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
       <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username">
+      <input type="username" class="form-control" id="username" name="username">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd">
+      <input type="password" class="form-control" id="pwd" name="pwd">
     </div>
     <button type="submit" class="btn btn-default">Login</button>
   </form>

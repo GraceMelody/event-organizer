@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2017 at 03:33 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: Dec 01, 2017 at 05:39 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `event_organizer`
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `bagian`
 --
 
-CREATE TABLE `bagian` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `bagian` (
+`id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bagian`
@@ -46,15 +46,15 @@ INSERT INTO `bagian` (`id`, `nama`, `aktif`) VALUES
 -- Table structure for table `event`
 --
 
-CREATE TABLE `event` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `event` (
+`id` int(11) NOT NULL,
   `id_wilayah` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') NOT NULL,
   `waktu_mulai` time NOT NULL,
   `waktu_selesai` time NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `event`
@@ -71,8 +71,8 @@ INSERT INTO `event` (`id`, `id_wilayah`, `nama`, `hari`, `waktu_mulai`, `waktu_s
 -- Table structure for table `honor`
 --
 
-CREATE TABLE `honor` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `honor` (
+`id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
   `id_personal` int(11) NOT NULL,
   `id_posisi` int(11) NOT NULL
@@ -84,8 +84,8 @@ CREATE TABLE `honor` (
 -- Table structure for table `personal`
 --
 
-CREATE TABLE `personal` (
-  `nip` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `personal` (
+`nip` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `id_bagian` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -94,7 +94,15 @@ CREATE TABLE `personal` (
   `koordinator` tinyint(1) NOT NULL,
   `entry_honor` tinyint(1) NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personal`
+--
+
+INSERT INTO `personal` (`nip`, `nama`, `id_bagian`, `email`, `hp`, `rekening`, `koordinator`, `entry_honor`, `aktif`) VALUES
+(1, 'Lala', 1, 'la@la.com', '02665', '23654651', 1, 0, 1),
+(12, 'Epuns', 2, 'e@pun.z', '516516', '512313', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -102,13 +110,13 @@ CREATE TABLE `personal` (
 -- Table structure for table `posisi`
 --
 
-CREATE TABLE `posisi` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `posisi` (
+`id` int(11) NOT NULL,
   `id_bagian` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `gaji` double NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posisi`
@@ -122,14 +130,32 @@ INSERT INTO `posisi` (`id`, `id_bagian`, `nama`, `gaji`, `aktif`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `password`) VALUES
+('admin', 'admin');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `wilayah`
 --
 
-CREATE TABLE `wilayah` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `wilayah` (
+`id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `aktif` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `wilayah`
@@ -148,43 +174,43 @@ INSERT INTO `wilayah` (`id`, `nama`, `aktif`) VALUES
 -- Indexes for table `bagian`
 --
 ALTER TABLE `bagian`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `event`
 --
 ALTER TABLE `event`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_wilayah` (`id_wilayah`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id_wilayah` (`id_wilayah`);
 
 --
 -- Indexes for table `honor`
 --
 ALTER TABLE `honor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_event` (`id_event`),
-  ADD KEY `id_personal` (`id_personal`),
-  ADD KEY `id_posisi` (`id_posisi`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id_event` (`id_event`), ADD KEY `id_personal` (`id_personal`), ADD KEY `id_posisi` (`id_posisi`);
 
 --
 -- Indexes for table `personal`
 --
 ALTER TABLE `personal`
-  ADD PRIMARY KEY (`nip`),
-  ADD KEY `id_bagian` (`id_bagian`);
+ ADD PRIMARY KEY (`nip`), ADD KEY `id_bagian` (`id_bagian`);
 
 --
 -- Indexes for table `posisi`
 --
 ALTER TABLE `posisi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_bagian` (`id_bagian`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id_bagian` (`id_bagian`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `wilayah`
 --
 ALTER TABLE `wilayah`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -194,32 +220,32 @@ ALTER TABLE `wilayah`
 -- AUTO_INCREMENT for table `bagian`
 --
 ALTER TABLE `bagian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `honor`
 --
 ALTER TABLE `honor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `posisi`
 --
 ALTER TABLE `posisi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `wilayah`
 --
 ALTER TABLE `wilayah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -228,27 +254,27 @@ ALTER TABLE `wilayah`
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id`);
+ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id`);
 
 --
 -- Constraints for table `honor`
 --
 ALTER TABLE `honor`
-  ADD CONSTRAINT `honor_ibfk_1` FOREIGN KEY (`id_event`) REFERENCES `event` (`id`),
-  ADD CONSTRAINT `honor_ibfk_2` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`nip`),
-  ADD CONSTRAINT `honor_ibfk_3` FOREIGN KEY (`id_posisi`) REFERENCES `posisi` (`id`);
+ADD CONSTRAINT `honor_ibfk_1` FOREIGN KEY (`id_event`) REFERENCES `event` (`id`),
+ADD CONSTRAINT `honor_ibfk_2` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`nip`),
+ADD CONSTRAINT `honor_ibfk_3` FOREIGN KEY (`id_posisi`) REFERENCES `posisi` (`id`);
 
 --
 -- Constraints for table `personal`
 --
 ALTER TABLE `personal`
-  ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id`);
+ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id`);
 
 --
 -- Constraints for table `posisi`
 --
 ALTER TABLE `posisi`
-  ADD CONSTRAINT `posisi_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id`);
+ADD CONSTRAINT `posisi_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
