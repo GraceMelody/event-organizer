@@ -1,3 +1,18 @@
+<?php require('php_header.php') ?>
+
+<?php
+  if (isset($_POST['submit'])) {
+    // Tambah wilayah
+    
+    $query = "INSERT INTO wilayah (nama, aktif) VALUES (?, ?)";
+    
+    $stmt = $db->prepare($query);
+    $true_bool = true;
+    $stmt->bind_param("si", $_POST['nama_wilayah'], $true_bool);
+    $stmt->execute();
+  }
+?>
+
 <?php require('header.php')?>
               <li class="active">
                 <a href="#">Data Master</a>
@@ -46,17 +61,17 @@
 
 <div class="row">
 <h2>Data baru</h2>
-       <form>
+       <form action="wilayah.php" method="POST">
          <div class="col-md-11">
           <div class="form-group">
 
             <label for="nama-wil">Nama:</label>
-            <input type="text" class="form-control" id="nama-wil">
+            <input type="text" class="form-control" name="nama_wilayah" id="nama-wil">
 
             </div>
             </div>
             <div class="col-md-2">
-            <button type="submit" class="btn btn-success ">Tambah</button>
+            <button type="submit" class="btn btn-success" name="submit">Tambah</button>
           </div>
       </form>
     </div>
