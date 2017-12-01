@@ -59,22 +59,22 @@
                 <input type="text" class="form-control" id="nip">
                 <label for="nama">Nama:</label>
                  <input type="text" class="form-control" id="nama">
-               <label for="wilayah">Wilayah:</label>
-               <select class="form-control" id="wilayah">
-                 <option>Malang</option>
+                 <label for="email">Email:</label>
+                  <input type="text" class="form-control" id="email">
+               <label for="divisi">Divisi:</label>
+               <select class="form-control" id="divisi">
+                 <option>Transportasi</option>
                </select>
-
-               <label for="event">Event:</label>
-                <input type="text" class="form-control" id="event">
-
-               <label for="hari">Hari/Waktu:</label>
-               <div class="row">
-
-               <select class="form-control col-xs-2 hari-tanggal" id="hari">
-                 <option>Senin</option>
-               </select>
-                 <input type="text" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Mulai" id="jam_mulai">
-                 <input type="text" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Selesai" id="jam_selesai">
+                <label for="hp">HP/WA:</label>
+                 <input type="text" class="form-control"id="hp">
+                 <label for="norek">No. Rek:</label>
+                 <input type="text" class="form-control" id="norek">
+                 <div class="checkbox">
+                    <label><input type="checkbox" value="">Koordinator</label>
+                  </div>
+                 <div class="checkbox">
+                    <label><input type="checkbox" value="">Entry Honor</label>
+                  </div>
                </div>
 
              </div>
