@@ -1,3 +1,42 @@
+<?php require('php_header.php') ?>
+
+<?php
+  if (isset($_POST['submit'])) {
+    // Tambah wilayah
+    
+    $query = "INSERT INTO bagian (nama, aktif) VALUES (?, ?)";
+    
+    $stmt = $db->prepare($query);
+    $true_bool = true;
+    $stmt->bind_param("si", $_POST['nama_bagian'], $true_bool);
+    $stmt->execute();
+  }
+  
+  function populateTable() {
+    require('db.php');
+    $query = "SELECT id, nama, aktif FROM bagian";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama, $aktif);
+    
+    while ($stmt->fetch()) {
+    ?>
+       <tr>
+        <td><?php echo $id ?></td>
+        <td><?php echo $nama ?></td>
+        <td>
+          <div class="checkbox">
+            <label><input type="checkbox" checked="<?php echo $aktif ?>"></label>
+          </div>
+        </td>
+       </tr>
+
+    <?php
+    }
+  }
+?>
+
+
 <?php require('header.php') ?>
               <li class="active">
                 <a href="#">Data Master</a>
@@ -35,28 +74,22 @@
          </tr>
        </thead>
        <tbody>
-         <tr>
-           <td>1.</td>
-           <td>Musik</td>
-           <td><div class="checkbox">
-              <label><input type="checkbox" value=""></label>
-        </div></td>
-         </tr>
+         <?php populateTable() ?>
        </tbody>
      </table>
 
      <div class="row">
        <h2>Data baru</h2>
-       <form>
+       <form action="bagian.php" method="POST">
          <div class="col-md-11">
           <div class="form-group">
 
             <label for="nama-bag">Nama bagian:</label>
-            <input type="text" class="form-control" id="nama-bag">
+            <input type="text" class="form-control" id="nama-bag" name="nama_bagian">
             </div>
             </div>
             <div class="col-md-2">
-            <button type="submit" class="btn btn-success ">Tambah</button>
+            <button type="submit" class="btn btn-success" name="submit">Tambah</button>
           </div>
       </form>
     </div>
