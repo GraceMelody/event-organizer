@@ -27,10 +27,12 @@
 <body>
 
 <div class="container">
-  <div class="text-center">
+  <div class=" border-show">
+    <span class="text-center">
     <h1>Event Organizer Management System</h1>
-    <h3 class="border-show">Bima, Evans, Grace, Yuan - 3115100??, 311710008, 311710010, 3115100??</h3>
+    <h3>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h3></span>
   </div>
+  <a href="logout.php"><span class="btn  col-lg-offset-11 col-md-offset-10 col-sm-offset-7 col-xs-offset-0 glyphicon glyphicon-log-out"></span> Log Out</a>
   <div class="col-xs-12 col-sm-3">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
