@@ -35,3 +35,7 @@ ul.padder{
 .row{
   margin-left:0px;
 }
+.form-control.hari-tanggal{
+  width: 30% !important;
+  margin-right: 10px;
+}
