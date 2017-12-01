@@ -11,6 +11,29 @@
     $stmt->bind_param("si", $_POST['nama_wilayah'], $true_bool);
     $stmt->execute();
   }
+  
+  function populateTable() {
+    require('db.php');
+    $query = "SELECT id, nama, aktif FROM wilayah";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama, $aktif);
+    
+    while ($stmt->fetch()) {
+    ?>
+       <tr>
+        <td><?php echo $id ?></td>
+        <td><?php echo $nama ?></td>
+        <td>
+          <div class="checkbox">
+            <label><input type="checkbox" checked="<?php echo $aktif ?>"></label>
+          </div>
+        </td>
+       </tr>
+
+    <?php
+    }
+  }
 ?>
 
 <?php require('header.php')?>
@@ -49,13 +72,7 @@
          </tr>
        </thead>
        <tbody>
-         <tr>
-           <td>John</td>
-           <td>Doe</td>
-           <td><div class="checkbox">
-  <label><input type="checkbox" value=""></label>
-</div></td>
-         </tr>
+       <?php populateTable() ?>
        </tbody>
      </table>
 
