@@ -72,37 +72,34 @@
          <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
-           <th>Aktif <span class="glyphicon glyphicon-sort"></th>
+           <th>Aktif</th>
          </tr>
        </thead>
        <tbody>
          <tr>
            <td>John</td>
            <td>Doe</td>
-           <td>john@example.com</td>
-           <td><button type="button" class="btn btn-danger">Hapus</button></td>
+           <td><div class="checkbox">
+  <label><input type="checkbox" value=""></label>
+</div></td>
          </tr>
        </tbody>
      </table>
 
-
+<div class="row">
+<h2>Data baru</h2>
        <form>
-         <div class="col-md-9">
+         <div class="col-md-11">
           <div class="form-group">
-            <label for="nama">Nama:</label>
-            <select class="form-control" id="nama">
-              <option>John Doe</option>
-            </select>
-              <label for="nama">Posisi:</label>
-              <select class="form-control" id="nama">
-                <option>1</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-2 col-md-offset-9">
-            <button type="submit" class="btn btn-success">Tambah</button>
-          </div>
 
+            <label for="nama-wil">Nama:</label>
+            <input type="text" class="form-control" id="nama-wil">
+
+            </div>
+            </div>
+            <div class="col-md-2">
+            <button type="submit" class="btn btn-success ">Tambah</button>
+          </div>
       </form>
     </div>
   </div>
