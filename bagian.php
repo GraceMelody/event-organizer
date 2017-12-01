@@ -1,8 +1,21 @@
 <?php require('php_header.php') ?>
 
 <?php
+
+  if (isset($_POST['setActive'])) {
+    // Set active
+    $query = "UPDATE bagian SET aktif=? WHERE id=?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("ii", $_POST['setActive'], $_POST['id']);
+    $stmt->execute();
+    echo $query;
+    echo $_POST['setActive'];
+    echo $_POST['id'];
+    die();
+  }
+  
   if (isset($_POST['submit'])) {
-    // Tambah wilayah
+    // Tambah bagian
 
     $query = "INSERT INTO bagian (nama, aktif) VALUES (?, ?)";
 
@@ -26,7 +39,7 @@
         <td><?php echo $nama ?></td>
         <td>
           <div class="checkbox">
-            <label><input type="checkbox" checked="<?php echo $aktif ?>"></label>
+            <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
           </div>
         </td>
        </tr>
@@ -36,8 +49,19 @@
   }
 ?>
 
-
 <?php require('header.php') ?>
+
+<script>
+  $(document).ready(function() {
+    $('table input[type=checkbox]').click(function() {
+      $.post('bagian.php', {
+          setActive: $(this).prop('checked') ? 1 : 0,
+          id: $(this).data("id")
+        })
+    })
+  })
+</script>
+
               <li class="active">
                 <a href="#">Data Master</a>
                 <ul class="nav padder">
