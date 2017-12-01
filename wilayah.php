@@ -41,18 +41,18 @@
           </button>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav">
-              <li>
+              <li class="active">
                 <a href="#">Data Master</a>
                 <ul class="nav padder">
 
 
-                 <li><a href="wilayah.php">Wilayah</a></li>
+                 <li class="active inner"><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
                  <li><a href="personal.php">Personal</a></li>
                </ul>
              </li>
-              <li class="active"><a href="entry-honor.php">Entry Honor</a></li>
+              <li><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
               <li><a href="#">Pembelian</a></li>
               <li><a href="#">Evaluasi</a></li>
@@ -65,39 +65,14 @@
     <div class="row">
       <div class="col-xs-11">
       <h4>Welcome, testUser</h4>
-        <h1>Entry Honor</h1>
-        <div class="row">
-          <div class="form-group col-xs-4">
-            <label for="sel1">Wilayah:</label>
-            <select class="form-control" id="wilayah">
-              <option>Malang</option>
-              <option>Surabaya</option>
-              <option>Pasuruan</option>
-              <option>Sidoarjo</option>
-            </select>
-          </div>
-          <div class="form-group col-xs-4">
-            <label for="sel1">Event:</label>
-            <select class="form-control" id="wilayah">
-              <option>Colony Cafe</option>
-              <option>Black Castle</option>
-              <option>Java Dancer</option>
-              <option>Golden Heritage</option>
-            </select>
-          </div>
-          <div class="form-group col-xs-4">
-            <label for="sel1">Tanggal:</label>
-            <input type="date" class="form-control" id="wilayah">
-          </input>
-          </div>
-        </div>
+        <h1>Wilayah</h1>
+
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
-           <th>Posisi <span class="glyphicon glyphicon-sort"></th>
-           <th>Hapus</th>
+           <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
        <tbody>
