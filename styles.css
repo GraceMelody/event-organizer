@@ -39,3 +39,11 @@ ul.padder{
   width: 30% !important;
   margin-right: 10px;
 }
+.form-control.periode{
+  width: 30% !important;
+  margin-right: 10px;
+}
+.pad15{
+  margin-left:15px;
+  margin-right:15px;
+}
