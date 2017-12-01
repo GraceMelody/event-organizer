@@ -22,7 +22,9 @@
 
     $stmt = $db->prepare($query)or die($db->error);
     $true_bool = true;
-    $stmt->bind_param("isisiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_bagian'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $_POST['koordinator'], $_POST['entry_honor'], $true_bool);
+    $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
+    $entry_honor_val = isset($_POST['entry_honor']) ? 1 : 0;
+    $stmt->bind_param("isisiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_bagian'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $entry_honor_val, $true_bool);
     $stmt->execute() or die($db->error);
   }
 
