@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-xs-11">
       <h4>Welcome, testUser</h4>
-        <h1>Rekap Honor</h1>
+        <h1>Detail Honor</h1>
         <div class="row">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
@@ -67,7 +67,8 @@
 
 
        <h3>Total Rp999K</h3>
-       <button type="button" class="btn btn-primary">Ekspor CSV</button>
+       <button type="button" class="btn btn-primary">Ekspor PDF</button>
+       <button type="button" class="btn btn-primary">Kirim Ke</button>
 
       </form>
     </div>

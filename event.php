@@ -32,6 +32,7 @@
            <th>Wilayah<span class="glyphicon glyphicon-sort"></th>
            <th>Event<span class="glyphicon glyphicon-sort"></th>
            <th>Hari<span class="glyphicon glyphicon-sort"></th>
+           <th>Jam<span class="glyphicon glyphicon-sort"></th>
            <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
