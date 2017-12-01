@@ -2,7 +2,6 @@
 
 
 <?php
-
   if (isset($_POST['setActive'])) {
     // Set active
     $query = "UPDATE personal SET aktif=? WHERE id=?";

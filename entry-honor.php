@@ -118,9 +118,41 @@
     <option disabled selected>---</option>
     <?php
     while ($stmt->fetch()) {
+      $isSelected = '';
+      if(isset($_GET['id_wilayah'])) {
+        $isSelected = $_GET['id_wilayah'] == $id ? 'selected' : '';
+      }
+      
       ?>
       
-      <option value="<?php echo $id ?>"><?php echo $nama_wilayah ?></option>
+      <option value="<?php echo $id ?>" <?php echo $isSelected ?>><?php echo $nama_wilayah ?></option>
+      
+      <?php
+    }
+  }
+  
+  function populateOptionEvent() {
+    require('db.php');
+    $query = "SELECT id, nama FROM event WHERE aktif = 1";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama);
+
+    while ($stmt->fetch()) {
+      $isSelected = '';
+      if(isset($_GET['id_wilayah'])) {
+        $isSelected = $_GET['id_event'] == $id ? 'selected' : '';
+      } else {
+        ?>
+        <option disabled selected>---</option>
+        <?php
+        return;
+      }
+      
+      
+      ?>
+      
+      <option value="<?php echo $id ?>" <?php echo $isSelected ?>><?php echo $nama ?></option>
       
       <?php
     }
@@ -134,6 +166,9 @@
   $(document).ready(function() {
     $('#select_wilayah').change(function() {
       window.location = "entry-honor.php?id_wilayah="+$(this).prop("value");
+    })
+    $('#select_event').change(function() {
+      window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event="+$(this).prop("value");
     })
   })
 </script>
@@ -172,11 +207,8 @@
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Event:</label>
-            <select class="form-control" id="event">
-              <option>Colony Cafe</option>
-              <option>Black Castle</option>
-              <option>Java Dancer</option>
-              <option>Golden Heritage</option>
+            <select class="form-control" id="select_event">
+              <?php populateOptionEvent() ?>
             </select>
           </div>
           <div class="form-group col-xs-4">
