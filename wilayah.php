@@ -30,7 +30,7 @@
          <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
-           <th>Aktif</th>
+           <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
        <tbody>

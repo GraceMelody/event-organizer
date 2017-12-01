@@ -6,8 +6,8 @@
 
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
-                 <li><a href="bagian.php">Bagian</a></li>
-                 <li class="active inner"><a href="posisi.php">Posisi</a></li>
+                 <li class="active inner"><a href="bagian.php">Bagian</a></li>
+                 <li><a href="posisi.php">Posisi</a></li>
                  <li><a href="personal.php">Personal</a></li>
                </ul>
              </li>
@@ -24,15 +24,13 @@
     <div class="row">
       <div class="col-xs-11">
       <h4>Welcome, testUser</h4>
-        <h1>Posisi</h1>
+        <h1>Bagian</h1>
 
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
-           <th>Nama <span class="glyphicon glyphicon-sort"></th>
-           <th>Bagian <span class="glyphicon glyphicon-sort"></th>
-           <th>Rp. <span class="glyphicon glyphicon-sort"></th>
+           <th>Nama Bagian <span class="glyphicon glyphicon-sort"></th>
            <th>Aktif <span class="glyphicon glyphicon-sort"></th>
          </tr>
        </thead>
