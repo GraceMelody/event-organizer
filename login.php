@@ -56,8 +56,8 @@ if (isset($_SESSION['username'])) {
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
-      <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username" name="username">
+      <label for="username">NIP:</label>
+      <input type="number" class="form-control" id="username" name="username">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>

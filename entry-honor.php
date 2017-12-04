@@ -1,5 +1,6 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
+<?php checkCanEditHonor() ?>
 
 <?php
 

@@ -1,6 +1,6 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
-
+<?php checkCanEditMaster() ?>
 <?php
   if (isset($_POST['setActive'])) {
     // Set active
@@ -98,7 +98,11 @@
                  <li class="active inner"><a href="personal.php">Personal</a></li>
                </ul>
              </li>
+              <?php
+                if (canEditHonor()) {
+              ?>
               <li><a href="entry-honor.php">Entry Honor</a></li>
+                <?php } ?>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
 
             </ul>

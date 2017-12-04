@@ -22,4 +22,24 @@
   function username() {
     echo $_SESSION['username'];
   }
+  
+  function canEditMaster() {
+    return $_SESSION['is_admin'];
+  }
+  
+  function canEditHonor(){
+    return $_SESSION['is_admin'] || $_SESSION['is_koordinator'];
+  }
+  
+  function checkCanEditMaster() {
+    if (!canEditMaster()) {
+      header("Location: laporan-honor.php");
+    }
+  }
+  
+  function checkCanEditHonor() {
+    if (!canEditHonor()) {
+      header("Location: laporan-honor.php");
+    }
+  }
 ?>
