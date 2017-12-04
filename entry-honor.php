@@ -18,12 +18,11 @@
   
   if (isset($_POST['submit'])) {
     // Tambah event
+    
+    $query = "INSERT INTO honor (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user) SELECT ?, ?, ?, ?, posisi.gaji, ? FROM posisi WHERE posisi.id=?";
 
-    $query = "INSERT INTO event (nama, id_wilayah, hari, waktu_mulai, waktu_selesai, aktif) VALUES (?, ?, ?, ?, ?, ?)";
-
-    $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $true_bool = true;
-    $stmt->bind_param("sisssi", $_POST['nama_event'], $_POST['id_wilayah'], $_POST['hari'], $_POST['jam_mulai'], $_POST['jam_selesai'], $true_bool);
+    $stmt = $db->prepare($query) or die($db->error);
+    $stmt->bind_param("iiisii", $_POST['id_event'], $_POST['id_personal'], $_POST['id_posisi'], $_POST['event_date'], getNIP(), $_POST['id_posisi']);
     $stmt->execute() or die($db->error);
   }
 
@@ -223,13 +222,13 @@
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Event:</label>
-            <select class="form-control" id="select_event">
+            <select class="form-control" id="select_event" <?php echo !isset($_GET['id_wilayah']) ? 'disabled' : '' ?> >
               <?php populateOptionEvent() ?>
             </select>
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Tanggal:</label>
-            <input type="date" class="form-control" id="select_date" <?php echo isset($_GET['event_date']) ? 'value='.$_GET['event_date'] : '' ?>>
+            <input type="date"  <?php echo !isset($_GET['id_event']) ? 'disabled' : '' ?> class="form-control" id="select_date" <?php echo isset($_GET['event_date']) ? 'value='.$_GET['event_date'] : '' ?>>
           </input>
           </div>
         </div>
@@ -248,21 +247,24 @@
      </table>
 
 
-       <form>
+       <form action="entry-honor.php" method="POST">
+        <input type="hidden" name="id_event" value="<?php echo $_GET['id_event']?>">
+        <input type="hidden" name="event_date" value="<?php echo $_GET['event_date']?>">
+        
          <div class="col-md-9">
           <div class="form-group">
             <label for="nama">Nama:</label>
-            <select class="form-control" id="nama">
+            <select class="form-control" id="nama" name="id_personal">
               <?php populateOptionPerson(); ?>
             </select>
               <label for="nama">Posisi:</label>
-              <select class="form-control" id="nama">
+              <select class="form-control" id="nama" name="id_posisi">
                 <?php populateOptionPosisi() ?>
               </select>
             </div>
           </div>
           <div class="col-md-2 col-md-offset-9">
-            <button type="submit" class="btn btn-success">Tambah</button>
+            <button type="submit" class="btn btn-success" name="submit">Tambah</button>
           </div>
 
       </form>
