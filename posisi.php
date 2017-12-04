@@ -4,7 +4,7 @@
   if (isset($_POST['setActive'])) {
     // Set active
     $query = "UPDATE posisi SET aktif=? WHERE id=?";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ii", $_POST['setActive'], $_POST['id']);
     $stmt->execute();
     echo $query;
@@ -18,7 +18,7 @@
     
     $query = "INSERT INTO posisi (nama, id_bagian, gaji, aktif) VALUES (?, ?, ?, ?)";
     
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $true_bool = true;
     $stmt->bind_param("sisi", $_POST['nama_bagian'], $_POST['id_bagian'], $_POST['gaji'], $true_bool);
     $stmt->execute();
@@ -27,7 +27,7 @@
   function populateTable() {
     require('db.php');
     $query = "SELECT posisi.id, posisi.nama nama, bagian.nama bagian, gaji, posisi.aktif FROM posisi INNER JOIN bagian ON id_bagian=bagian.id";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $bagian, $gaji, $aktif);
     
@@ -52,7 +52,7 @@
   function populateListBagian() {
     require('db.php');
     $query = "SELECT id, nama FROM bagian where aktif=1";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
     while ($stmt->fetch()) {

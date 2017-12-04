@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
   if (isset($_POST['submit'])) {
     $_SESSION['username'] = $_POST['username'];
     $query = "SELECT * FROM user WHERE username = ? AND password = ?";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ss",$_POST['username'], $_POST['pwd']);
     $stmt->execute();
     $result = mysqli_query($db, $query);

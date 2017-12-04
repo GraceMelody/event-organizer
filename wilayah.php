@@ -4,7 +4,7 @@
   if (isset($_POST['setActive'])) {
     // Set active
     $query = "UPDATE wilayah SET aktif=? WHERE id=?";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ii", $_POST['setActive'], $_POST['id']);
     $stmt->execute();
     echo $query;
@@ -18,7 +18,7 @@
 
     $query = "INSERT INTO wilayah (nama, aktif) VALUES (?, ?)";
 
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $true_bool = true;
     $stmt->bind_param("si", $_POST['nama_wilayah'], $true_bool);
     $stmt->execute();
@@ -27,7 +27,7 @@
   function populateTable() {
     require('db.php');
     $query = "SELECT id, nama, aktif FROM wilayah";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $aktif);
 

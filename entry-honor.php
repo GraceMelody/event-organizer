@@ -6,7 +6,7 @@
   if (isset($_POST['setActive'])) {
     // Set active
     $query = "UPDATE event SET aktif=? WHERE id=?";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ii", $_POST['setActive'], $_POST['id']);
     $stmt->execute();
     echo $query;
@@ -20,7 +20,7 @@
 
     $query = "INSERT INTO event (nama, id_wilayah, hari, waktu_mulai, waktu_selesai, aktif) VALUES (?, ?, ?, ?, ?, ?)";
 
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $true_bool = true;
     $stmt->bind_param("sisssi", $_POST['nama_event'], $_POST['id_wilayah'], $_POST['hari'], $_POST['jam_mulai'], $_POST['jam_selesai'], $true_bool);
     $stmt->execute() or die($db->error);
@@ -44,7 +44,7 @@
                   WHERE id_wilayah=?
                   AND id_event=?
                   ";
-      $stmt = $db->prepare($query) or die($db->error);
+      $stmt = $db->prepare($query) or show_error_dialog($db->error);
       $stmt->bind_param('ii',$_GET['id_wilayah'], $_GET['id_event']);
     } else {
       return;
@@ -81,7 +81,7 @@
     
     require('db.php');
     $query = "SELECT nip, nama FROM personal WHERE aktif = 1";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
 
@@ -98,7 +98,7 @@
     
     require('db.php');
     $query = "SELECT id, nama FROM posisi WHERE aktif = 1";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
 
@@ -114,7 +114,7 @@
     
     require('db.php');
     $query = "SELECT id, nama FROM wilayah WHERE aktif = 1";
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama_wilayah);
 
@@ -148,7 +148,7 @@
     }
     
     $query = "SELECT id, nama FROM event WHERE aktif = 1 AND id_wilayah = ".$_GET['id_wilayah'];
-    $stmt = $db->prepare($query);
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
     
