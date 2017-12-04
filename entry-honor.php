@@ -204,7 +204,7 @@
   <div class="col-xs-12 col-sm-9">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, testUser</h4>
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Entry Honor</h1>
         <div class="row">
           <div class="form-group col-xs-4">

@@ -18,4 +18,8 @@
       header("Location: login.php");
     }
   }
+  
+  function username() {
+    echo $_SESSION['username'];
+  }
 ?>
