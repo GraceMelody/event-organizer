@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2017 at 09:58 AM
+-- Generation Time: Dec 04, 2017 at 12:17 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -41,7 +41,8 @@ CREATE TABLE `bagian` (
 INSERT INTO `bagian` (`id`, `nama`, `aktif`, `entry_date`, `entry_user`) VALUES
 (1, 'Bagian 1', 1, '2017-12-04 08:27:47', 0),
 (2, 'Bagian 2', 1, '2017-12-04 08:27:47', 0),
-(3, 'ADMIN', 0, '2017-12-04 08:36:39', 0);
+(3, 'ADMIN', 0, '2017-12-04 08:36:39', 0),
+(4, 'IT', 1, '2017-12-04 09:55:01', 0);
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,7 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`id`, `id_wilayah`, `nama`, `hari`, `waktu_mulai`, `waktu_selesai`, `aktif`, `entry_date`, `entry_user`) VALUES
 (1, 3, 'ABC', 'Rabu', '00:00:00', '00:00:00', 1, '2017-12-04 08:28:34', 0),
 (2, 3, 'ABC', 'Rabu', '00:00:00', '00:00:00', 1, '2017-12-04 08:28:34', 0),
-(3, 2, 'Minggu Pgi', 'Minggu', '08:00:00', '10:00:00', 0, '2017-12-04 08:28:34', 0);
+(3, 2, 'Minggu Pgi', 'Minggu', '08:00:00', '10:00:00', 1, '2017-12-04 08:28:34', 0);
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,14 @@ CREATE TABLE `honor` (
 
 INSERT INTO `honor` (`id`, `id_event`, `id_personal`, `id_posisi`, `tanggal_event`, `gaji`, `entry_date`, `entry_user`) VALUES
 (1, 1, 1, 1, '0000-00-00', 0, '2017-12-04 08:29:19', 0),
-(2, 3, 2, 2, '0000-00-00', 0, '2017-12-04 08:29:19', 0);
+(2, 3, 2, 2, '0000-00-00', 0, '2017-12-04 08:29:19', 0),
+(3, 3, 123123, 1, '2017-12-03', 123, '2017-12-04 10:49:10', 222),
+(4, 3, 65, 6, '2017-12-03', 100000, '2017-12-04 10:51:25', 222),
+(5, 3, 123123, 1, '2017-12-02', 123, '2017-12-04 10:53:46', 222),
+(6, 3, 793287, 1, '2017-12-02', 123, '2017-12-04 10:53:50', 222),
+(7, 3, 123123, 2, '2017-12-02', 123, '2017-12-04 10:54:29', 222),
+(8, 3, 123123, 2, '2017-12-02', 123, '2017-12-04 10:54:29', 222),
+(9, 3, 793287, 5, '2017-12-02', 4444, '2017-12-04 10:54:35', 222);
 
 -- --------------------------------------------------------
 
@@ -105,7 +113,7 @@ CREATE TABLE `personal` (
   `nip` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `id_bagian` int(11) NOT NULL,
+  `id_posisi` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `hp` varchar(50) NOT NULL,
   `rekening` varchar(50) NOT NULL,
@@ -120,15 +128,22 @@ CREATE TABLE `personal` (
 -- Dumping data for table `personal`
 --
 
-INSERT INTO `personal` (`nip`, `password`, `nama`, `id_bagian`, `email`, `hp`, `rekening`, `koordinator`, `admin`, `aktif`, `entry_date`, `entry_user`) VALUES
-(0, 'admin123', 'Admin', 1, 'admin@admin', '123123123', '123123123', 0, 1, 1, '2017-12-04 08:36:00', 0),
-(1, '', 'Bojo', 1, 'asdf@saf.com', '123123123', '98798789797897', 0, 0, 1, '2017-12-04 08:29:40', 0),
-(2, '', 'Bojo23', 2, 'asdf@saf.com', '123123123', '98798789797897', 0, 0, 1, '2017-12-04 08:29:40', 0),
-(123, '', 'Evans Jahja', 1, 'evans.jahja@yahoo.com', '0', '0', 0, 0, 1, '2017-12-04 08:29:40', 0),
-(567, '', 'Haha', 2, 'hehe', '234234', '345345', 0, 0, 1, '2017-12-04 08:29:40', 0),
+INSERT INTO `personal` (`nip`, `password`, `nama`, `id_posisi`, `email`, `hp`, `rekening`, `koordinator`, `admin`, `aktif`, `entry_date`, `entry_user`) VALUES
+(0, 'admin123', 'Admin', 1, 'admin@admin', '123123123', '123123123', 1, 1, 1, '2017-12-04 08:36:00', 0),
+(1, 'asdf', 'Bojo', 1, 'asdf@saf.com', '123123123', '98798789797897', 0, 0, 0, '2017-12-04 08:29:40', 0),
+(2, '', 'Bojo23', 1, 'asdf@saf.com', '123123123', '98798789797897', 1, 1, 1, '2017-12-04 08:29:40', 0),
+(65, '', 'Prog Guy', 6, 'asdf', '0', '0', 1, 0, 1, '2017-12-04 10:05:01', 0),
+(123, '', 'Evans Jahja', 1, 'evans.jahja@yahoo.com', '0', '0', 1, 1, 0, '2017-12-04 08:29:40', 0),
+(222, '', 'Admin222', 5, '222', '0', '0', 0, 1, 1, '2017-12-04 09:53:38', 0),
+(567, '', 'Haha', 1, 'hehe', '234234', '345345', 0, 0, 1, '2017-12-04 08:29:40', 0),
 (568, '', '', 1, '', '0', '0', 1, 1, 1, '2017-12-04 08:29:40', 0),
 (569, '', '', 1, '', '0', '0', 1, 0, 1, '2017-12-04 08:29:40', 0),
-(793287, '', 'mumu', 1, 'mu@mu.mu', '829891', '0', 0, 0, 1, '2017-12-04 08:29:40', 0);
+(9999, '', '', 1, '', '0', '0', 0, 0, 1, '2017-12-04 10:11:28', 222),
+(123123, '', 'Bojolol Aqwer', 5, 'asdf', '123123', '123123', 1, 1, 1, '2017-12-04 09:49:38', 0),
+(793287, '', 'mumu', 1, 'mu@mu.mu', '829891', '0', 0, 0, 1, '2017-12-04 08:29:40', 0),
+(793290, '', '', 1, '', '0', '0', 0, 0, 1, '2017-12-04 10:07:51', 0),
+(793291, '', '', 1, '', '0', '0', 0, 0, 1, '2017-12-04 10:07:56', 0),
+(793292, '', '', 1, '', '0', '0', 0, 0, 1, '2017-12-04 10:07:56', 0);
 
 -- --------------------------------------------------------
 
@@ -151,9 +166,11 @@ CREATE TABLE `posisi` (
 --
 
 INSERT INTO `posisi` (`id`, `id_bagian`, `nama`, `gaji`, `aktif`, `entry_date`, `entry_user`) VALUES
-(1, 2, 'posisi', 123, 0, '2017-12-04 08:29:58', 0),
+(1, 2, 'posisi', 123, 1, '2017-12-04 08:29:58', 0),
 (2, 2, 'posisi2', 123, 1, '2017-12-04 08:29:58', 0),
-(5, 1, 'hello', 4444, 1, '2017-12-04 08:29:58', 0);
+(5, 1, 'hello', 4444, 1, '2017-12-04 08:29:58', 0),
+(6, 4, 'Programmer', 100000, 1, '2017-12-04 09:55:12', 0),
+(7, 4, 'Programmer', 100000, 0, '2017-12-04 09:55:12', 0);
 
 -- --------------------------------------------------------
 
@@ -210,7 +227,7 @@ ALTER TABLE `honor`
 --
 ALTER TABLE `personal`
   ADD PRIMARY KEY (`nip`),
-  ADD KEY `id_bagian` (`id_bagian`);
+  ADD KEY `id_posisi` (`id_posisi`);
 
 --
 -- Indexes for table `posisi`
@@ -233,7 +250,7 @@ ALTER TABLE `wilayah`
 -- AUTO_INCREMENT for table `bagian`
 --
 ALTER TABLE `bagian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `event`
 --
@@ -243,17 +260,17 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `honor`
 --
 ALTER TABLE `honor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=793290;
+  MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=793293;
 --
 -- AUTO_INCREMENT for table `posisi`
 --
 ALTER TABLE `posisi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `wilayah`
 --
@@ -287,7 +304,7 @@ ALTER TABLE `honor`
 -- Constraints for table `personal`
 --
 ALTER TABLE `personal`
-  ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id`);
+  ADD CONSTRAINT `personal_ibfk_2` FOREIGN KEY (`id_posisi`) REFERENCES `posisi` (`id`);
 
 --
 -- Constraints for table `posisi`
