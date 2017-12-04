@@ -30,7 +30,7 @@
   function populateTable() {
     require('db.php');
     
-    if (isset($_GET['id_wilayah']) && isset($_GET['id_event'])) {
+    if (isset($_GET['id_wilayah']) && isset($_GET['id_event']) && isset($_GET['event_date'])) {
       $query = "SELECT 
                   honor.id,
                   personal.nama,
@@ -44,9 +44,10 @@
                   ON honor.id_posisi=posisi.id
                   WHERE id_wilayah=?
                   AND id_event=?
+                  AND DATE(tanggal_event) = ?
                   ";
       $stmt = $db->prepare($query) or show_error_dialog($db->error);
-      $stmt->bind_param('ii',$_GET['id_wilayah'], $_GET['id_event']);
+      $stmt->bind_param('iis',$_GET['id_wilayah'], $_GET['id_event'], $_GET['event_date']);
     } else {
       return;
     }
@@ -179,6 +180,11 @@
     $('#select_event').change(function() {
       window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event="+$(this).prop("value");
     })
+    
+    $('#select_date').change(function() {
+      window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date="+$(this).prop("value");
+    })
+    
   })
 </script>
               <?php if (canEditMaster()) { ?>
@@ -223,7 +229,7 @@
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Tanggal:</label>
-            <input type="date" class="form-control" id="wilayah">
+            <input type="date" class="form-control" id="select_date" <?php echo isset($_GET['event_date']) ? 'value='.$_GET['event_date'] : '' ?>>
           </input>
           </div>
         </div>
