@@ -41,7 +41,7 @@
                   INNER JOIN event
                   ON id_event=event.id
                   INNER JOIN posisi
-                  ON id_posisi=posisi.id
+                  ON honor.id_posisi=posisi.id
                   WHERE id_wilayah=?
                   AND id_event=?
                   ";
