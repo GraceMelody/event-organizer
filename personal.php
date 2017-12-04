@@ -4,13 +4,28 @@
 <?php
   if (isset($_POST['setActive'])) {
     // Set active
-    $query = "UPDATE personal SET aktif=? WHERE id=?";
+    $query = "UPDATE personal SET aktif=? WHERE nip=?";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $stmt->bind_param("ii", $_POST['setActive'], $_POST['id']);
+    $stmt->bind_param("ii", $_POST['setActive'], $_POST['nip']);
     $stmt->execute();
-    echo $query;
-    echo $_POST['setActive'];
-    echo $_POST['id'];
+    die();
+  }
+  
+  if (isset($_POST['setKoordinator'])) {
+    // Set active
+    $query = "UPDATE personal SET koordinator=? WHERE nip=?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param("ii", $_POST['setKoordinator'], $_POST['nip']);
+    $stmt->execute();
+    die();
+  }
+  
+  if (isset($_POST['setAdmin'])) {
+    // Set active
+    $query = "UPDATE personal SET admin=? WHERE nip=?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param("ii", $_POST['setAdmin'], $_POST['nip']);
+    $stmt->execute();
     die();
   }
 
@@ -41,13 +56,13 @@
            <td><?php echo $nama_posisi ?></td>
            <td><?php echo $norek ?></td>
            <td><div class="checkbox">
-              <label><input type="checkbox" <?php echo $koordinator ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
+              <label><input type="checkbox" class="check-koordinator" <?php echo $koordinator ? "checked" : "" ?> data-nip="<?php echo $nip ?>"></label>
         </div></td>
            <td><div class="checkbox">
-              <label><input type="checkbox" <?php echo $admin ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
+              <label><input type="checkbox" class="check-admin" <?php echo $admin ? "checked" : "" ?> data-nip="<?php echo $nip ?>"></label>
         </div></td>
            <td><div class="checkbox">
-              <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
+              <label><input type="checkbox" class="check-aktif" <?php echo $aktif ? "checked" : "" ?> data-nip="<?php echo $nip ?>"></label>
         </div></td>
          </tr>
     <?php
@@ -77,10 +92,24 @@
 
 <script>
   $(document).ready(function() {
-    $('table input[type=checkbox]').click(function() {
+    $('table input[type=checkbox].check-aktif').click(function() {
       $.post('personal.php', {
           setActive: $(this).prop('checked') ? 1 : 0,
-          id: $(this).data("id")
+          nip: $(this).data("nip")
+        })
+    })
+    
+    $('table input[type=checkbox].check-koordinator').click(function() {
+      $.post('personal.php', {
+          setKoordinator: $(this).prop('checked') ? 1 : 0,
+          nip: $(this).data("nip")
+        })
+    })
+    
+    $('table input[type=checkbox].check-admin').click(function() {
+      $.post('personal.php', {
+          setAdmin: $(this).prop('checked') ? 1 : 0,
+          nip: $(this).data("nip")
         })
     })
   })
