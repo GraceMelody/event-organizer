@@ -31,13 +31,13 @@
 
   if (isset($_POST['submit'])) {
     // Tambah event
-    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, koordinator, admin, aktif) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
+    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?,?,?,?, ?)";
 
     $stmt = $db->prepare($query) or die($db->error);
     $true_bool = true;
     $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
     $admin_val = isset($_POST['admin']) ? 1 : 0;
-    $stmt->bind_param("isisiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $admin_val, $true_bool);
+    $stmt->bind_param("isisiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $admin_val, $true_bool, getNIP());
     $stmt->execute() or die($db->error);
   }
 

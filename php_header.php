@@ -23,6 +23,10 @@
     echo $_SESSION['username'];
   }
   
+  function getNIP() {
+    return $_SESSION['nip'];
+  }
+  
   function canEditMaster() {
     return $_SESSION['is_admin'];
   }
