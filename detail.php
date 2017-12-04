@@ -1,5 +1,11 @@
-<?php require('header.php') ?>
+<?php require('php_header.php') ?>
 <?php checkLogin(); ?>
+<?php 
+  if (!isset($_GET['id_user'])) {
+    header('Location: laporan-honor.php');
+  }
+?>
+<?php require('header.php') ?>
               <li>
                 <a href="#">Data Master</a>
                 <ul class="nav padder">
