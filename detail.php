@@ -1,4 +1,5 @@
 <?php require('header.php') ?>
+<?php checkLogin(); ?>
               <li>
                 <a href="#">Data Master</a>
                 <ul class="nav padder">

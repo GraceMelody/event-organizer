@@ -1,4 +1,5 @@
 <?php require("php_header.php") ?>
+<?php checkLogin(); ?>
 <?php session_destroy(); ?>
 <!DOCTYPE html>
 <html lang="en">

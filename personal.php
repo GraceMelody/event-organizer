@@ -1,5 +1,5 @@
 <?php require('php_header.php') ?>
-
+<?php checkLogin(); ?>
 
 <?php
   if (isset($_POST['setActive'])) {
