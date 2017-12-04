@@ -59,7 +59,7 @@
           <tr>
            <td><?php echo $id ?></td>
            <td><?php echo $nama_personal ?></td>
-           <td>john@example.com</td>
+           <td><?php echo $posisi ?></td>
            <td><button type="button" class="btn btn-danger">Hapus</button></td>
          </tr>
     <?php
@@ -245,9 +245,8 @@
        <?php populateTable() ?>
        </tbody>
      </table>
-
-
-       <form action="entry-honor.php" method="POST">
+     
+       <form action="entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date=<?php echo isset($_GET['event_date']) ? $_GET['event_date'] : '' ?>" method="POST">
         <input type="hidden" name="id_event" value="<?php echo $_GET['id_event']?>">
         <input type="hidden" name="event_date" value="<?php echo $_GET['event_date']?>">
         
