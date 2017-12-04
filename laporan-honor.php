@@ -28,23 +28,20 @@
 
   function populateTable() {
     require('db.php');
-    $query = "SELECT event.id, wilayah.nama, event.nama, event.aktif FROM event INNER JOIN wilayah ON event.id_wilayah=wilayah.id";
+    $query = "SELECT id, personal.nama, SUM(gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    
     $stmt->execute();
-    $stmt->bind_result($id, $nama_wilayah, $nama_event, $aktif);
+    $stmt->bind_result($id, $nama, $total_gaji);
 
     while ($stmt->fetch()) {
     ?>
-         <tr>
-           <td><?php echo $id ?></td>
-           <td><?php echo $nama_wilayah ?></td>
-           <td><?php echo $nama_event ?></td>
-           <td>Sabtu</td>
-           <td>13.00 - 15.00</td>
-           <td><div class="checkbox">
-              <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
-        </div></td>
-         </tr>
+          <tr>
+            <td><?php echo $id ?></td>
+            <td><?php echo $nama ?></td>
+            <td><?php echo $total_gaji ?></td>
+            <td><a href="detail.php"class="btn btn-default">Detail</a></td>
+          </tr>
     <?php
     }
   }
@@ -144,12 +141,7 @@
          </tr>
        </thead>
        <tbody>
-         <tr>
-           <td>John</td>
-           <td>Doe</td>
-           <td>john@example.com</td>
-           <td><a href="detail.php"class="btn btn-default">Detail</a></td>
-         </tr>
+          <?php populateTable() ?>
        </tbody>
      </table>
 
