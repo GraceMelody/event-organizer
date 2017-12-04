@@ -17,29 +17,29 @@
   if (isset($_POST['submit'])) {
     // Tambah event
 
-    $query = "INSERT INTO personal (nip, nama, id_bagian, email, hp, rekening, koordinator, entry_honor, aktif) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
+    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, koordinator, entry_honor, aktif) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
 
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $true_bool = true;
     $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
     $entry_honor_val = isset($_POST['entry_honor']) ? 1 : 0;
-    $stmt->bind_param("isisiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_bagian'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $entry_honor_val, $true_bool);
+    $stmt->bind_param("isisiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $entry_honor_val, $true_bool);
     $stmt->execute() or die($db->error);
   }
 
   function populateTable() {
     require('db.php');
-    $query = "SELECT personal.nip, personal.nama, bagian.nama ,personal.rekening, personal.koordinator, personal.admin, personal.aktif FROM personal INNER JOIN bagian ON personal.id_bagian=bagian.id";
+    $query = "SELECT personal.nip, personal.nama, posisi.nama ,personal.rekening, personal.koordinator, personal.admin, personal.aktif FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
-    $stmt->bind_result($nip, $nama, $nama_bagian,$norek,$koordinator,$entry_honor, $aktif);
+    $stmt->bind_result($nip, $nama, $nama_posisi,$norek,$koordinator,$entry_honor, $aktif);
 
     while ($stmt->fetch()) {
     ?>
          <tr>
            <td><?php echo $nip ?></td>
            <td><?php echo $nama ?></td>
-           <td><?php echo $nama_bagian ?></td>
+           <td><?php echo $nama_posisi ?></td>
            <td><?php echo $norek ?></td>
            <td><div class="checkbox">
               <label><input type="checkbox" <?php echo $koordinator ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
@@ -55,18 +55,18 @@
     }
   }
 
-  function populateOptionDivisi() {
+  function populateOptionPosisi() {
 
     require('db.php');
-    $query = "SELECT id, nama FROM bagian WHERE aktif = 1";
+    $query = "SELECT id, nama FROM posisi WHERE aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
-    $stmt->bind_result($id, $nama_bagian);
+    $stmt->bind_result($id, $nama_posisi);
 
     while ($stmt->fetch()) {
       ?>
 
-      <option value="<?php echo $id ?>"><?php echo $nama_bagian ?></option>
+      <option value="<?php echo $id ?>"><?php echo $nama_posisi ?></option>
 
       <?php
     }
@@ -117,7 +117,7 @@
          <tr class="active">
            <th>NIP <span class="glyphicon glyphicon-sort"></th>
            <th>Nama<span class="glyphicon glyphicon-sort"></th>
-           <th>Bagian<span class="glyphicon glyphicon-sort"></th>
+           <th>Posisi<span class="glyphicon glyphicon-sort"></th>
            <th>No. Rek<span class="glyphicon glyphicon-sort"></th>
            <th>Koordinator <span class="glyphicon glyphicon-sort"></th>
            <th>Entry Honor <span class="glyphicon glyphicon-sort"></th>
@@ -143,9 +143,9 @@
                  <input type="text" class="form-control" id="nama" name="nama">
                  <label for="email">Email:</label>
                   <input type="text" class="form-control" id="email" name="email">
-               <label for="divisi">Divisi:</label>
-               <select class="form-control" id="divisi" name="id_bagian">
-                <?php populateOptionDivisi() ?>
+               <label for="posisi">Posisi:</label>
+               <select class="form-control" id="posisi" name="id_posisi">
+                <?php populateOptionPosisi() ?>
                </select>
                 <label for="hp">HP/WA:</label>
                  <input type="text" class="form-control"id="hp"name="hp">
