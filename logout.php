@@ -1,5 +1,5 @@
 <?php require("php_header.php") ?>
-<?php $_SESSION['loggedin']=1?>
+<?php session_destroy(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

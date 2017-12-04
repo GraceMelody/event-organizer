@@ -4,13 +4,18 @@ if (isset($_SESSION['username'])) {
   header("Location: wilayah.php");
 } else {
   if (isset($_POST['submit'])) {
-    $_SESSION['username'] = $_POST['username'];
-    $query = "SELECT * FROM user WHERE username = ? AND password = ?";
+    // $_SESSION['username'] = $_POST['username'];
+    $query = "SELECT nama, koordinator, admin, nip FROM personal WHERE nip = ? AND password = ? AND aktif=1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ss",$_POST['username'], $_POST['pwd']);
     $stmt->execute();
-    $result = mysqli_query($db, $query);
-    $r=mysqli_num_rows($result);
+    $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['nip']);
+    if ($stmt->fetch()) {
+      header("Location: wilayah.php");
+    }
+    
+    
+    
   }
 }
   ?>
@@ -47,7 +52,7 @@ if (isset($_SESSION['username'])) {
     <h1>Event Organizer Management System</h1>
     <h4>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h4>
   </div>
-  <form>
+  <form action="login.php" method="POST">
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
@@ -58,7 +63,7 @@ if (isset($_SESSION['username'])) {
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd" name="pwd">
     </div>
-    <button type="submit" class="btn btn-default">Login</button>
+    <button type="submit" class="btn btn-default" name="submit">Login</button>
   </form>
 </div>
 </div>
