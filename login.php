@@ -1,7 +1,7 @@
 <?php require("php_header.php")?>
 <?php
 if (isset($_SESSION['username'])) {
-  header("Location: wilayah.php");
+  header("Location: laporan-honor.php");
 } else {
   if (isset($_POST['submit'])) {
     // $_SESSION['username'] = $_POST['username'];
@@ -11,7 +11,7 @@ if (isset($_SESSION['username'])) {
     $stmt->execute();
     $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['nip']);
     if ($stmt->fetch()) {
-      header("Location: wilayah.php");
+      header("Location: laporan-honor.php");
     }
     
     

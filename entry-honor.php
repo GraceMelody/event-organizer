@@ -181,7 +181,7 @@
     })
   })
 </script>
-
+              <?php if (canEditMaster()) { ?>
               <li>
                 <a href="#">Data Master</a>
                 <ul class="nav padder">
@@ -194,6 +194,7 @@
                  <li><a href="personal.php">Personal</a></li>
                </ul>
              </li>
+             <?php } ?>
               <li class="active"><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
 
