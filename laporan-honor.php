@@ -1,6 +1,7 @@
 <?php require('php_header.php') ?>
 
 <?php checkLogin(); ?>
+<?php checkCanCheckLaporanHonor() ?>
 
 <?php
 
@@ -41,7 +42,7 @@
             <td><?php echo $id ?></td>
             <td><?php echo $nama ?></td>
             <td><?php echo $total_gaji ?></td>
-            <td><a href="detail.php"class="btn btn-default">Detail</a></td>
+            <td><a href="detail.php?id_user=<?php echo $id ?>"class="btn btn-default">Detail</a></td>
           </tr>
     <?php
     }
@@ -105,6 +106,7 @@
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <?php } ?>
               <li class="active"><a href="laporan-honor.php">Laporan Honor</a></li>
+              <li><a href="detail.php">Detail Honor</a></li>
 
             </ul>
         </div>
