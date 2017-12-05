@@ -20,10 +20,14 @@
     // Tambah event
     
     
-    $query = "INSERT INTO honor (id_event, id_personal, tanggal_event, honor.gaji, entry_user) SELECT ?, ?, ?, ?, posisi.gaji, ? FROM posisi WHERE posisi.id=?";
+    $query = "INSERT INTO honor 
+    (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user)
+    SELECT ?, ?, personal.id_posisi, ?, posisi.gaji, ?
+    FROM posisi INNER JOIN personal ON personal.id_posisi=posisi.id
+    WHERE personal.nip=?";
 
     $stmt = $db->prepare($query) or die($db->error);
-    $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP());
+    $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
     $stmt->execute() or die($db->error);
   }
 
