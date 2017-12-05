@@ -211,7 +211,10 @@
              </li>
              <?php } ?>
               <li class="active"><a href="entry-honor.php">Entry Honor</a></li>
+              <?php if (canCheckLaporanHonor()) { ?>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
+              <?php } ?>
+              <li><a href="detail.php">Detail Honor Saya</a></li>
 
             </ul>
         </div>

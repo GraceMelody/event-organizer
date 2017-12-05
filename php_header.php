@@ -32,18 +32,28 @@
   }
   
   function canEditHonor(){
+    return $_SESSION['is_admin'] || $_SESSION['is_koordinator'] || $_SESSION['is_honor_editor'];
+  }
+  
+  function canCheckLaporanHonor() {
     return $_SESSION['is_admin'] || $_SESSION['is_koordinator'];
+  }
+  
+  function checkCanCheckLaporanHonor() {
+    if (!canCheckLaporanHonor()) {
+      header("Location: detail.php");
+    }
   }
   
   function checkCanEditMaster() {
     if (!canEditMaster()) {
-      header("Location: laporan-honor.php");
+      header("Location: detail.php");
     }
   }
   
   function checkCanEditHonor() {
     if (!canEditHonor()) {
-      header("Location: laporan-honor.php");
+      header("Location: detail.php");
     }
   }
 ?>
