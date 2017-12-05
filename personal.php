@@ -116,7 +116,7 @@
 </script>
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav padder">
+                <ul class="nav-padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -136,13 +136,12 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+      <div class="col-sm-13">
         <h1>Personal</h1>
 
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="active">
+         <tr class="tabelurut">
            <th>NIP <span class="glyphicon glyphicon-sort"></th>
            <th>Nama<span class="glyphicon glyphicon-sort"></th>
            <th>Posisi<span class="glyphicon glyphicon-sort"></th>
@@ -157,7 +156,7 @@
        </tbody>
      </table>
 
-     <div class="row">
+     <div class="row2">
        <h2>Data baru</h2>
        <form action="personal.php" method="POST">
          <div class="col-md-11">

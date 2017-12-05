@@ -1,4 +1,5 @@
 <?php require('php_header.php') ?>
+
 <?php checkLogin(); ?>
 
 <?php
@@ -90,11 +91,8 @@
   })
 </script>
               <?php if (canEditMaster()) { ?>
-              <li>
-                <a href="#">Data Master</a>
-                <ul class="nav padder">
-
-
+              <li><a href="#">Data Master</a>
+                <ul class="nav-padder">
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
@@ -115,17 +113,16 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
-        <h1>Rekap Honor</h1>
-        <div class="row">
+      <div class="col-sm-11">
+        <h1>Laporan Honor</h1>
+        <div class="row2">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel1">
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel2">
         </div>
 
-          <div class="form-group col-xs-9">
+          <div class="form-group col-sm-9">
             <label for="sel1">Bagian:</label>
             <select class="form-control" id="wilayah">
               <option>Musik</option>
@@ -133,7 +130,7 @@
         </div>
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="active">
+         <tr class="tabelurut">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
            <th>Total <span class="glyphicon glyphicon-sort"></th>

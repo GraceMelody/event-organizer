@@ -1,4 +1,5 @@
-<?php require("php_header.php")?>
+<?php require("php_header.php") ?>
+
 <?php
 if (isset($_SESSION['username'])) {
   header("Location: laporan-honor.php");
@@ -27,6 +28,7 @@ if (isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="style1.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="./jquery.tablesorter.min.js"></script>
@@ -45,26 +47,27 @@ if (isset($_SESSION['username'])) {
 
   </script>
 </head>
-<body>
-
-<div class="container">
-  <div class="text-center">
-    <h1>Event Organizer Management System</h1>
-    <h4>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h4>
+<body>  
+  <div class="login">
+  <div class="col-lg-12" style="float:none; margin:0 auto;">
+    <h1 class="login1"><u>Log in to System</u></h1>
   </div>
+
+
   <form action="login.php" method="POST">
-    <div class="row">
+    <div class="login">
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
-      <label for="username">NIP:</label>
-      <input type="number" class="form-control" id="username" name="username">
+      <label for="username" class="inputan">NIP:</label>
+      <input type="number" class="form-control" id="username" name="username" placeholder="nomor NIP">
     </div>
     <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="pwd">
+      <label for="pwd" class="inputan">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="pwd" placeholder="password">
     </div>
-    <button type="submit" class="btn btn-default" name="submit">Login</button>
+    <button type="submit" class="button" name="submit">login</button>
   </form>
+  </div>
 </div>
-</div>
+
 </body>

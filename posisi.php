@@ -80,7 +80,7 @@
 
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav padder">
+                <ul class="nav-padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -99,14 +99,13 @@
     </nav>
   </div>
   <div class="col-xs-12 col-sm-9">
-    <div class="row">
-      <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+    <div class="row3">
+      <div class="col-sm-11">
         <h1>Posisi</h1>
 
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="active">
+         <tr class="tabelurut">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
            <th>Bagian <span class="glyphicon glyphicon-sort"></th>
@@ -119,7 +118,7 @@
        </tbody>
      </table>
 
-<div class="row">
+<div class="row2">
 <h2>Data baru</h2>
        <form action="posisi.php" method="POST">
          <div class="col-md-11">
