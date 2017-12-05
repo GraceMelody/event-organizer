@@ -31,7 +31,7 @@
               <?php if (canCheckLaporanHonor()) { ?>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
               <?php } ?>
-              <li class="active"><a href="detail.php">Detail Honor Saya</a></li>
+              <li class="active"><a href="detail.php">Detail Honor</a></li>
 
             </ul>
         </div>

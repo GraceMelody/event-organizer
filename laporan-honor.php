@@ -108,7 +108,7 @@
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <?php } ?>
               <li class="active"><a href="laporan-honor.php">Laporan Honor</a></li>
-              <li><a href="detail.php">Detail Honor Saya</a></li>
+              <li><a href="detail.php">Detail Honor</a></li>
 
             </ul>
         </div>
