@@ -4,6 +4,11 @@
   if (!isset($_GET['id_user'])) {
     $_GET['id_user'] = getNIP();
   }
+  
+  if (!canCheckLaporanHonor()) {
+    // You can only see yours...
+    $_GET['id_user'] = getNIP();
+  }
 ?>
 <?php require('header.php') ?>
               <?php if(canEditMaster()) { ?>
