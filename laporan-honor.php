@@ -54,7 +54,7 @@
             <td><?php echo $id ?></td>
             <td><?php echo $nama ?></td>
             <td class="text-right"><?php echo $total_gaji ?></td>
-            <td><a href="detail.php?id_user=<?php echo $id ?>"class="btn btn-default">Detail</a></td>
+            <td><a href="detail.php?id_user=<?php echo $id ?>&begin_date=<?php echo $_GET['begin_date']?>&end_date=<?php echo $_GET['end_date']?>"class="btn btn-default">Detail</a></td>
           </tr>
     <?php
     }
