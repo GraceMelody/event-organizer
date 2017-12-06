@@ -42,6 +42,9 @@
             <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
           </div>
         </td>
+        <td>
+          <a href="#">Delete</a>
+        </td>
        </tr>
 
     <?php

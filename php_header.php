@@ -6,7 +6,12 @@
     ?>
     <script>
     $(document).ready(function(){
-      alert("<?php echo($msg) ?>");
+      //alert("<?php echo($msg) ?>");
+      $("body").append("<div id='error-dialog'><?php echo $msg ?><div>");
+      $("#error-dialog").dialog({
+        modal: true,
+        title: "Error",
+      });
     })
     </script>
     <?php
