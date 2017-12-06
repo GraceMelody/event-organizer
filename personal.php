@@ -116,9 +116,7 @@
 </script>
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav padder">
-
-
+                <ul class="nav-padder">
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
@@ -136,13 +134,12 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+      <div class="col-sm-11">
         <h1>Personal</h1>
-
-        <table class="table table-hover tablesorter">
+      <div class="table-container">
+      <table class="table table-hover tablesorter">
        <thead>
-         <tr class="active">
+         <tr class="tabelurut">
            <th>NIP <span class="glyphicon glyphicon-sort"></th>
            <th>Nama<span class="glyphicon glyphicon-sort"></th>
            <th>Posisi<span class="glyphicon glyphicon-sort"></th>
@@ -156,8 +153,9 @@
          <?php populateTable();?>
        </tbody>
      </table>
+     </div>
 
-     <div class="row">
+     <div class="padding-padding">
        <h2>Data baru</h2>
        <form action="personal.php" method="POST">
          <div class="col-md-11">
@@ -189,7 +187,7 @@
 
              </div>
 
-            <button type="submit" class="btn btn-success col-xs-12" name="submit">Tambah</button>
+            <button type="submit" class="btn btn-success col-xs-9" name="submit">Tambah</button>
 
       </form>
     </div>

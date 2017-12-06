@@ -1,7 +1,20 @@
-.border-show{
-  padding-bottom: 15px;
-  border-bottom: 2px solid black;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+body {
+  background: rgba(245, 132, 33, .87);
+  min-height: 100vh;
+  width: auto;
+  margin: 0;
+}
+
+.border-show {
+  padding-bottom: 10px;
+  border-bottom: 3px solid white;
+}
+
 .navbar-default .navbar-toggle .icon-bar {
     background-color: black;
 }
@@ -20,20 +33,74 @@
 .navbar .container-fluid,
 .navbar .navbar-collapse
 {
-  background-color: rgb(248, 248, 248);
+  background-color: rgba(245, 132, 33, .87);
   padding: 0;
 }
-li.active{
-  background-color: rgb(231, 231, 231);
+
+.nav-padder {
+  margin-left: 20px;
 }
-li.active.inner{
-  background-color: rgb(221, 221, 221);
+
+@media only screen and (max-width: 700px){
+  .responsive {
+  width: 49.99999%;
+  margin: 6px 0;
+  }
+} 
+
+@media only screen and (max-width: 500px){
+  .responsive {
+  width: 100%;
+  }
+} 
+
+
+ul, li, li a {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
-ul.padder{
-  padding-left:10px;
+
+li a {
+  padding: 5px;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: all .2s;
 }
-.row{
-  margin-left:0px;
+
+li a:hover {
+  background: #fff;
+  color: rgb(245, 132, 33);
+}
+
+.row {
+  background:#fff;
+  border-radius:6px;
+  padding:0px;
+  padding-top:0px;
+  margin:0px;
+  margin-top: 70px;
+  box-shadow:15px 15px 0px rgba(0,0,0,.1);
+}
+
+.padding-padding {
+  padding:0px;
+  padding-top:0px;
+  margin:0px;
+}
+
+.table-container {
+  overflow: auto;
+  overflow-y: auto;
+}
+
+.tabelurut {
+  font-size: 16px;
+  background-color: rgba(245, 132, 33, .87);
+  border-color: rgba(245, 132, 33, .87);
+  color: #ffffff;
 }
 .form-control.hari-tanggal{
   width: 30% !important;
