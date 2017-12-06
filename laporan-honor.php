@@ -29,9 +29,9 @@
 
   function getTotalPrice() {
     require('db.php');
-    $query = "SELECT FORMAT(SUM(gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?)";
+    $query = "SELECT FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian = ?";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $stmt->bind_param('ss', $_GET['begin_date'], $_GET['end_date']);
+    $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
     $stmt->execute();
     $stmt->bind_result($grand_total_gaji);
     $stmt->fetch();
@@ -42,9 +42,9 @@
   
   function populateTable() {
     require('db.php');
-    $query = "SELECT id, personal.nama, FORMAT(SUM(gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) GROUP BY id_personal";
+    $query = "SELECT honor.id, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $stmt->bind_param('ss', $_GET['begin_date'], $_GET['end_date']);
+    $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $total_gaji);
 
@@ -95,11 +95,13 @@
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama_bagian);
-
+    ?>
+      <option disabled <?php echo isset($_GET['bagian']) ? '' : 'selected'?> >---</option>
+    <?php
     while ($stmt->fetch()) {
       ?>
 
-      <option value="<?php echo $id ?>"><?php echo $nama_bagian ?></option>
+      <option value="<?php echo $id ?>" <?php if(isset($_GET['bagian'])) {echo $_GET['bagian']==$id ? 'selected' : ''; }?> ><?php echo $nama_bagian ?></option>
 
       <?php
     }
@@ -111,12 +113,30 @@
 
 <script>
   $(document).ready(function() {
+    
+    //https://css-tricks.com/snippets/jquery/get-query-params-object/
+    jQuery.extend({
+      getQueryParameters : function(str) {
+        return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+      }
+    });
+    
     $('#begin_date').change(function() {
-      window.location = "laporan-honor.php?begin_date="+$(this).prop("value");
+      const qs = $.getQueryParameters();
+      qs.begin_date = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
     })
     
     $('#end_date').change(function() {
-      window.location = "laporan-honor.php?begin_date=<?php echo isset($_GET['begin_date']) ? $_GET['begin_date'] : '' ?>&end_date="+$(this).prop("value");
+      const qs = $.getQueryParameters();
+      qs.end_date = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
+    })
+    
+    $('#select-wilayah').change(function() {
+      const qs = $.getQueryParameters();
+      qs.bagian = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
     })
   })
 </script>
@@ -154,12 +174,12 @@
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="begin_date" <?php echo isset($_GET['begin_date']) ? "value=\"".$_GET['begin_date']."\"" : '' ?> >
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date" <?php echo isset($_GET['begin_date']) ? '' : 'disabled'  ?> <?php echo isset($_GET['end_date']) ? "value=\"".$_GET['end_date']."\"" : ''?>>
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date" <?php echo isset($_GET['end_date']) ? "value=\"".$_GET['end_date']."\"" : ''?>>
         </div>
 
           <div class="form-group col-xs-9">
             <label for="sel1">Bagian:</label>
-            <select class="form-control" id="wilayah">
+            <select class="form-control" id="select-wilayah">
               <?php populateOptionBagian() ?>
             </select>
         </div>
