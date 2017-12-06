@@ -28,10 +28,10 @@
 
   function populateTable() {
     require('db.php');
-    $query = "SELECT event.id, wilayah.nama, event.nama, event.aktif FROM event INNER JOIN wilayah ON event.id_wilayah=wilayah.id";
+    $query = "SELECT event.id, wilayah.nama, event.nama, event.hari, CONCAT(DATE_FORMAT(waktu_mulai, '%H:%i'), ' - ', DATE_FORMAT(waktu_selesai, '%H:%i')) ,event.aktif FROM event INNER JOIN wilayah ON event.id_wilayah=wilayah.id";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
-    $stmt->bind_result($id, $nama_wilayah, $nama_event, $aktif);
+    $stmt->bind_result($id, $nama_wilayah, $nama_event, $hari, $jam, $aktif);
 
     while ($stmt->fetch()) {
     ?>
@@ -39,8 +39,8 @@
            <td><?php echo $id ?></td>
            <td><?php echo $nama_wilayah ?></td>
            <td><?php echo $nama_event ?></td>
-           <td>Sabtu</td>
-           <td>13.00 - 15.00</td>
+           <td><?php echo $hari ?></td>
+           <td><?php echo $jam ?></td>
            <td><div class="checkbox">
               <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>
         </div></td>
