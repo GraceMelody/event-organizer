@@ -29,9 +29,9 @@
 
   function populateTable() {
     require('db.php');
-    $query = "SELECT id, personal.nama, SUM(gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip GROUP BY id_personal";
+    $query = "SELECT id, personal.nama, SUM(gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    
+    $stmt->bind_param('ss', $_GET['begin_date'], $_GET['end_date']);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $total_gaji);
 
@@ -71,6 +71,22 @@
       ?>
 
       <option value="<?php echo $id ?>"><?php echo $nama_wilayah ?></option>
+
+      <?php
+    }
+  }
+  
+  function populateOptionBagian() {
+    require('db.php');
+    $query = "SELECT id, nama FROM bagian WHERE aktif = 1";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama_bagian);
+
+    while ($stmt->fetch()) {
+      ?>
+
+      <option value="<?php echo $id ?>"><?php echo $nama_bagian ?></option>
 
       <?php
     }
@@ -131,7 +147,7 @@
           <div class="form-group col-xs-9">
             <label for="sel1">Bagian:</label>
             <select class="form-control" id="wilayah">
-              <option>Musik</option>
+              <?php populateOptionBagian() ?>
             </select>
         </div>
         <div class="table-container">
