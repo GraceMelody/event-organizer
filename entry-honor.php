@@ -19,10 +19,15 @@
   if (isset($_POST['submit'])) {
     // Tambah event
     
-    $query = "INSERT INTO honor (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user) SELECT ?, ?, ?, ?, posisi.gaji, ? FROM posisi WHERE posisi.id=?";
+    
+    $query = "INSERT INTO honor 
+    (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user)
+    SELECT ?, ?, personal.id_posisi, ?, posisi.gaji, ?
+    FROM posisi INNER JOIN personal ON personal.id_posisi=posisi.id
+    WHERE personal.nip=?";
 
     $stmt = $db->prepare($query) or die($db->error);
-    $stmt->bind_param("iiisii", $_POST['id_event'], $_POST['id_personal'], $_POST['id_posisi'], $_POST['event_date'], getNIP(), $_POST['id_posisi']);
+    $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
     $stmt->execute() or die($db->error);
   }
 
@@ -81,15 +86,15 @@
   function populateOptionPerson() {
     
     require('db.php');
-    $query = "SELECT nip, nama FROM personal WHERE aktif = 1";
+    $query = "SELECT nip, personal.nama, posisi.nama FROM personal INNER JOIN posisi on id_posisi=posisi.id WHERE personal.aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
-    $stmt->bind_result($id, $nama);
+    $stmt->bind_result($id, $nama, $posisi);
 
     while ($stmt->fetch()) {
       ?>
       
-      <option value="<?php echo $id ?>"><?php echo $nama ?></option>
+      <option data-posisi="<?php echo $posisi ?>" value="<?php echo $id ?>"><?php echo $nama ?></option>
       
       <?php
     }
@@ -184,6 +189,11 @@
       window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date="+$(this).prop("value");
     })
     
+    $('#posisi').html($('#nama').find(':selected').data('posisi'));
+    $('#nama').change(function() {
+      $('#posisi').html($(this).find(':selected').data('posisi'));
+    })
+    
   })
 </script>
               <?php if (canEditMaster()) { ?>
@@ -201,7 +211,10 @@
              </li>
              <?php } ?>
               <li class="active"><a href="entry-honor.php">Entry Honor</a></li>
+              <?php if (canCheckLaporanHonor()) { ?>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
+              <?php } ?>
+              <li><a href="detail.php">Detail Honor</a></li>
 
             </ul>
         </div>
@@ -255,10 +268,7 @@
             <select class="form-control" id="nama" name="id_personal">
               <?php populateOptionPerson(); ?>
             </select>
-              <label for="nama">Posisi:</label>
-              <select class="form-control" id="nama" name="id_posisi">
-                <?php populateOptionPosisi() ?>
-              </select>
+              <label>Posisi:</label> <span id="posisi">ASDF</span>
             </div>
           </div>
           <div class="col-md-2 col-md-offset-9">

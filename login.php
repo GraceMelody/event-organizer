@@ -2,17 +2,17 @@
 
 <?php
 if (isset($_SESSION['username'])) {
-  header("Location: laporan-honor.php");
+  header("Location: detail.php");
 } else {
   if (isset($_POST['submit'])) {
     // $_SESSION['username'] = $_POST['username'];
-    $query = "SELECT nama, koordinator, admin, nip FROM personal WHERE nip = ? AND password = ? AND aktif=1";
+    $query = "SELECT nama, koordinator, admin, entry_honor, nip FROM personal WHERE nip = ? AND password = ? AND aktif=1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param("ss",$_POST['username'], $_POST['pwd']);
     $stmt->execute();
-    $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['nip']);
+    $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['is_honor_editor'], $_SESSION['nip']);
     if ($stmt->fetch()) {
-      header("Location: laporan-honor.php");
+      header("Location: detail.php");
     }
     
     

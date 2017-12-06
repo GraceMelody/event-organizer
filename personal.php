@@ -11,6 +11,15 @@
     die();
   }
   
+  if (isset($_POST['setEntryHonor'])) {
+    // Set active
+    $query = "UPDATE personal SET entry_honor=? WHERE nip=?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param("ii", $_POST['setEntryHonor'], $_POST['nip']);
+    $stmt->execute();
+    die();
+  }
+  
   if (isset($_POST['setKoordinator'])) {
     // Set active
     $query = "UPDATE personal SET koordinator=? WHERE nip=?";
@@ -31,22 +40,23 @@
 
   if (isset($_POST['submit'])) {
     // Tambah event
-    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?,?,?,?, ?)";
+    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
 
     $stmt = $db->prepare($query) or die($db->error);
     $true_bool = true;
+    $entry_honor_val = isset($_POST['entry-honor']) ? 1 : 0;
     $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
     $admin_val = isset($_POST['admin']) ? 1 : 0;
-    $stmt->bind_param("isisiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $koordinator_val, $admin_val, $true_bool, getNIP());
+    $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
     $stmt->execute() or die($db->error);
   }
 
   function populateTable() {
     require('db.php');
-    $query = "SELECT personal.nip, personal.nama, posisi.nama ,personal.rekening, personal.koordinator, personal.admin, personal.aktif FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id";
+    $query = "SELECT personal.nip, personal.nama, posisi.nama ,personal.rekening, personal.entry_honor, personal.koordinator, personal.admin, personal.aktif FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
-    $stmt->bind_result($nip, $nama, $nama_posisi,$norek,$koordinator, $admin, $aktif);
+    $stmt->bind_result($nip, $nama, $nama_posisi,$norek, $entry_honor, $koordinator, $admin, $aktif);
 
     while ($stmt->fetch()) {
     ?>
@@ -55,6 +65,9 @@
            <td><?php echo $nama ?></td>
            <td><?php echo $nama_posisi ?></td>
            <td><?php echo $norek ?></td>
+           <td><div class="checkbox">
+              <label><input type="checkbox" class="check-entry-honor" <?php echo $entry_honor ? "checked" : "" ?> data-nip="<?php echo $nip ?>"></label>
+        </div></td>
            <td><div class="checkbox">
               <label><input type="checkbox" class="check-koordinator" <?php echo $koordinator ? "checked" : "" ?> data-nip="<?php echo $nip ?>"></label>
         </div></td>
@@ -99,6 +112,13 @@
         })
     })
     
+    $('table input[type=checkbox].check-entry-honor').click(function() {
+      $.post('personal.php', {
+          setEntryHonor: $(this).prop('checked') ? 1 : 0,
+          nip: $(this).data("nip")
+        })
+    })
+    
     $('table input[type=checkbox].check-koordinator').click(function() {
       $.post('personal.php', {
           setKoordinator: $(this).prop('checked') ? 1 : 0,
@@ -126,6 +146,7 @@
              </li>
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
+              <li><a href="detail.php">Detail Honor</a></li>
 
             </ul>
         </div>
@@ -144,6 +165,7 @@
            <th>Nama<span class="glyphicon glyphicon-sort"></th>
            <th>Posisi<span class="glyphicon glyphicon-sort"></th>
            <th>No. Rek<span class="glyphicon glyphicon-sort"></th>
+           <th>Entry Honor <span class="glyphicon glyphicon-sort"></th>
            <th>Koordinator <span class="glyphicon glyphicon-sort"></th>
            <th>Admin <span class="glyphicon glyphicon-sort"></th>
            <th>Aktif <span class="glyphicon glyphicon-sort"></th>
@@ -177,6 +199,9 @@
                  <input type="text" class="form-control"id="hp"name="hp">
                  <label for="norek">No. Rek:</label>
                  <input type="text" class="form-control" id="norek"name="rekening">
+                 <div class="checkbox">
+                    <label><input type="checkbox" value="" name="entry-honor">Entry Honor</label>
+                  </div>
                  <div class="checkbox">
                     <label><input type="checkbox" value="" name="koordinator">Koordinator</label>
                   </div>
