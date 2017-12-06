@@ -14,7 +14,7 @@
               <?php if(canEditMaster()) { ?>
               <li>
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -40,9 +40,10 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Detail Honor</h1>
-        <div class="row1">
+        <div class="row">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel1">
@@ -64,7 +65,7 @@
         <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Posisi <span class="glyphicon glyphicon-sort"></th>
            <th>Wilayah <span class="glyphicon glyphicon-sort"></th>

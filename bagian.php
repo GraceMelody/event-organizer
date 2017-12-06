@@ -65,7 +65,7 @@
 
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -86,12 +86,13 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php echo $_SESSION['username'] ?></h4>
         <h1>Bagian</h1>
         <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama Bagian <span class="glyphicon glyphicon-sort"></th>
            <th>Aktif <span class="glyphicon glyphicon-sort"></th>
@@ -103,7 +104,7 @@
      </table>
      </div>
 
-     <div class="padding-padding">
+     <div class="row">
        <h2>Data baru</h2>
        <form action="bagian.php" method="POST">
          <div class="col-md-11">

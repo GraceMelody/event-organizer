@@ -95,7 +95,7 @@
 
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -116,12 +116,13 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Event</h1>
         <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Wilayah<span class="glyphicon glyphicon-sort"></th>
            <th>Event<span class="glyphicon glyphicon-sort"></th>
@@ -136,7 +137,7 @@
      </table>
      </div>
 
-     <div class="padding-padding">
+     <div class="row">
        <h2>Data baru</h2>
        <form action="event.php" method="POST">
          <div class="col-md-11">
@@ -153,7 +154,7 @@
                 <input type="text" class="form-control" id="event" name="nama_event">
 
                <label for="hari">Hari/Waktu:</label>
-               <div class="row2">
+               <div class="row">
 
                <select class="form-control col-xs-2 hari-tanggal" id="hari" name="hari">
                  <?php populateHari() ?>
@@ -163,7 +164,7 @@
                </div>
 
              </div>
-             <br><br>
+
             <button type="submit" class="btn btn-success" name="submit">Tambah</button>
 
       </form>

@@ -199,7 +199,7 @@
               <?php if (canEditMaster()) { ?>
               <li>
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -223,9 +223,10 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Entry Honor</h1>
-        <div class="padding-padding">
+        <div class="row">
           <div class="form-group col-xs-4">
             <label for="sel1">Wilayah:</label>
             <select class="form-control" id="select_wilayah">
@@ -246,7 +247,7 @@
         </div>
       <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
            <th>Posisi <span class="glyphicon glyphicon-sort"></th>
