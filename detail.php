@@ -43,6 +43,7 @@
               <option>Lucky Andi</option>
             </select>
         </div>
+        <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="tabelurut">
@@ -64,6 +65,7 @@
          </tr>
        </tbody>
      </table>
+     </div>
 
 
        <h3>Total Rp999K</h3>

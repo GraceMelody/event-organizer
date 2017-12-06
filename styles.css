@@ -75,53 +75,29 @@ li a:hover {
   color: rgb(245, 132, 33);
 }
 
-.row{
-  background:#fff;
-  border-radius:6px;
-  padding:20px;
-  padding: 0;
-  padding-top:0;
-  width:850px;
-  height: 1000px;
-  margin:10px auto;
-  box-shadow:15px 15px 0px rgba(0,0,0,.1);
-}
-
-.row1 {
-  background:#fff;
-  border-radius:6px;
-  padding:20px;
-  padding: 0;
-  padding-top:0px;
-  width:700px;
-  margin:50px auto;
-}
-
-.row2 {
+.row {
   background:#fff;
   border-radius:6px;
   padding:0px;
   padding-top:0px;
-  position: left;
-  width:700px;
-  margin:10px auto;
-}
-
-.row3 {
-  background:#fff;
-  border-radius:6px;
-  padding:20px;
-  padding-top:0px;
-  position: left;
-  width:800px;
-  height: 1000px;
-  margin:10px auto;
+  margin:0px;
+  margin-top: 70px;
   box-shadow:15px 15px 0px rgba(0,0,0,.1);
 }
 
+.padding-padding {
+  padding:0px;
+  padding-top:0px;
+  margin:0px;
+}
+
+.table-container {
+  overflow: auto;
+  overflow-y: auto;
+}
+
 .tabelurut {
-  font-size: 21px;
-  background-image: none;
+  font-size: 16px;
   background-color: rgba(245, 132, 33, .87);
   border-color: rgba(245, 132, 33, .87);
   color: #ffffff;

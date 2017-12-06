@@ -99,10 +99,10 @@
     </nav>
   </div>
   <div class="col-xs-12 col-sm-9">
-    <div class="row3">
+    <div class="row">
       <div class="col-sm-11">
         <h1>Posisi</h1>
-
+        <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="tabelurut">
@@ -117,8 +117,9 @@
          <?php populateTable() ?>
        </tbody>
      </table>
+     </div>
 
-<div class="row2">
+<div class="padding-padding">
 <h2>Data baru</h2>
        <form action="posisi.php" method="POST">
          <div class="col-md-11">
