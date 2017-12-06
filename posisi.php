@@ -38,7 +38,7 @@
          <td><?php echo $id ?></td>
          <td><?php echo $nama ?></td>
          <td><?php echo $bagian ?></td>
-         <td><?php echo $gaji ?></td>
+         <td class="text-right"><?php echo $gaji ?></td>
          <td>
           <div class="checkbox">
             <label><input type="checkbox" <?php echo $aktif ? "checked" : "" ?> data-id="<?php echo $id ?>"></label>

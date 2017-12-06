@@ -53,7 +53,7 @@
           <tr>
             <td><?php echo $id ?></td>
             <td><?php echo $nama ?></td>
-            <td><?php echo $total_gaji ?></td>
+            <td class="text-right"><?php echo $total_gaji ?></td>
             <td><a href="detail.php?id_user=<?php echo $id ?>"class="btn btn-default">Detail</a></td>
           </tr>
     <?php
