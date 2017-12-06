@@ -11,6 +11,22 @@
   }
 ?>
 <?php 
+  function getTotalPrice() {
+    require('db.php');
+    $query = "SELECT FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor
+    INNER JOIN posisi ON honor.id_posisi = posisi.id
+    INNER JOIN event ON honor.id_event = event.id
+    INNER JOIN wilayah ON event.id_wilayah = wilayah.id
+    WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND  id_personal=?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['id_user']);
+    $stmt->execute();
+    $stmt->bind_result($grand_total_gaji);
+    $stmt->fetch();
+    ?>
+    <h3>Total: Rp<?php echo $grand_total_gaji; ?></h3>
+    <?php
+  }
   function populateTable() {
     require('db.php');
     $query = "SELECT honor.id, posisi.nama, wilayah.nama, event.nama, DATE(honor.tanggal_event), FORMAT(honor.gaji, 2, 'de_DE') FROM honor
@@ -32,7 +48,6 @@
             <td><?php echo $event ?></td>
             <td><?php echo $date ?></td>
             <td class="text-right"><?php echo $gaji ?></td>
-            <td><a href="detail.php?id_user=<?php echo $id ?>"class="btn btn-default">Detail</a></td>
           </tr>
     <?php
     }
@@ -106,7 +121,7 @@
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="begin_date" <?php echo isset($_GET['begin_date']) ? 'value='.$_GET['begin_date'] : '' ?>>
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date">
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date" <?php echo isset($_GET['end_date']) ? 'value='.$_GET['end_date'] : '' ?>>
         </div>
 
           <div class="form-group col-xs-9">
@@ -135,7 +150,7 @@
      </div>
 
 
-       <h3>Total Rp999K</h3>
+       <?php getTotalPrice() ?>
        <button type="button" class="btn btn-primary">Ekspor PDF</button>
        <button type="button" class="btn btn-primary">Kirim Ke</button>
 
