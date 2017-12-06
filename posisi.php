@@ -27,7 +27,7 @@
   
   function populateTable() {
     require('db.php');
-    $query = "SELECT posisi.id, posisi.nama nama, bagian.nama bagian, gaji, posisi.aktif FROM posisi INNER JOIN bagian ON id_bagian=bagian.id";
+    $query = "SELECT posisi.id, posisi.nama nama, bagian.nama bagian, FORMAT(gaji, 2, 'de_DE'), posisi.aktif FROM posisi INNER JOIN bagian ON id_bagian=bagian.id";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $bagian, $gaji, $aktif);
