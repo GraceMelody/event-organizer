@@ -1,3 +1,26 @@
+<?php require("php_header.php") ?>
+
+<?php
+if (isset($_SESSION['username'])) {
+  header("Location: detail.php");
+} else {
+  if (isset($_POST['submit'])) {
+    // $_SESSION['username'] = $_POST['username'];
+    $query = "SELECT nama, koordinator, admin, entry_honor, nip FROM personal WHERE nip = ? AND password = ? AND aktif=1";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param("ss",$_POST['username'], $_POST['pwd']);
+    $stmt->execute();
+    $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['is_honor_editor'], $_SESSION['nip']);
+    if ($stmt->fetch()) {
+      header("Location: detail.php");
+    }
+
+
+
+  }
+}
+  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +52,7 @@
       <div class="item background c"></div>
     </div>
   </div>
-  
+
   <div class="covertext">
     <div class="col-lg-12" style="float:none; margin:0 auto;">
       <h2 class="title">Event Organizer Management System</h2>
@@ -38,10 +61,10 @@
       <h5 class="subtitle">Grace - 311710010 Yuan  - 311510025</h5>
     </div>
     <div class="col-xs-12 explore">
-      <a href="login.php"><button type="button" class="btn btn-lg explorebtn">Silahkan Login.</button></a>
+      <a href="login.php"><button type="button" class="btn btn-lg explorebtn">Log In</button></a>
     </div>
   </div>
-  
+
 </div>
 </body>
 </html>

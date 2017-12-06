@@ -1,3 +1,11 @@
+@font-face {
+    font-family: HelveticaNeue-Bold;
+    src: url(fonts/circular-bold.woff2);
+}
+@font-face {
+    font-family: HelveticaNeue-Light;
+    src: url(fonts/circular-light.ttf);
+}
 .container-fluid.main{
   position: relative;
   padding: 0;
@@ -10,15 +18,15 @@
   border: 0;
   box-shadow: none;
   padding: 10px;
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .navbar-default .navbar-brand {
-  font-family: Verdana;
+  font-family: HelveticaNeue-Bold;
   color: #ffffff;
   font-size: 20px;
 }
@@ -118,20 +126,14 @@
 
 .covertext {
   position: absolute;
-  top: 200px; 
-  left: 0px; 
-  right: 0px; 
-}
-
-.login {
-  position: absolute;
-  top: 110px;
+  top: 200px;
   left: 0px;
   right: 0px;
 }
 
-.login1 {
-  font-family: Tahoma;
+
+.header-login {
+  font-family: HelveticaNeue-Bold;
   font-weight: 200;
   font-size: 3.5em;
   color: #fff;
@@ -140,6 +142,7 @@
 
 .inputan {
   font-size: 1.75em;
+  font-family: HelveticaNeue-Light;
   text-align: left;
   font-weight: 100;
   color: #fff;
@@ -165,13 +168,16 @@ input:placeholder {
 .button {
   color: rgba(255, 255, 255, 1);
   width: 6em;
-  font-family: Verdana;
+  font-family: HelveticaNeue-Bold;
   font-weight: 100;
   font-size: 1.75em;
   border: 1px solid rgba(255, 255, 255, .75);
   background: transparent;
   transition: all 200ms ease-in;
   border-radius: .65em;
+}
+body > div.covertext > div.col-xs-12.explore > a > button{
+  font-family: HelveticaNeue-Bold;
 }
 
 .button:hover, .button:focus,
@@ -183,7 +189,7 @@ input:placeholder {
 
 
 .title {
-  font-family: Verdana;
+  font-family: HelveticaNeue-Bold;
   font-weight: 600;
   font-size: 60px;
   color: #ffffff;
@@ -191,7 +197,7 @@ input:placeholder {
 }
 
 .subtitle {
-  font-family: Verdana;
+  font-family: HelveticaNeue-Bold;
   font-size: 23px;
   color: #ffffff;
   text-align: center;

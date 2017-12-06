@@ -14,9 +14,9 @@ if (isset($_SESSION['username'])) {
     if ($stmt->fetch()) {
       header("Location: detail.php");
     }
-    
-    
-    
+
+
+
   }
 }
   ?>
@@ -47,10 +47,10 @@ if (isset($_SESSION['username'])) {
 
   </script>
 </head>
-<body>  
+<body>
   <div class="login">
   <div class="col-lg-12" style="float:none; margin:0 auto;">
-    <h1 class="login1"><u>Log in to System</u></h1>
+    <h1 class="header-login">Log in to System</h1>
   </div>
 
 
@@ -59,13 +59,13 @@ if (isset($_SESSION['username'])) {
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
       <label for="username" class="inputan">NIP:</label>
-      <input type="number" class="form-control" id="username" name="username" placeholder="nomor NIP">
+      <input type="number" class="form-control" id="username" name="username" placeholder="NIP">
     </div>
     <div class="form-group">
       <label for="pwd" class="inputan">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="pwd" placeholder="password">
+      <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
     </div>
-    <button type="submit" class="button" name="submit">login</button>
+    <button type="submit" class="button" name="submit">Log in</button>
   </form>
   </div>
 </div>
