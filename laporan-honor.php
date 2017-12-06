@@ -27,9 +27,22 @@
     $stmt->execute() or die($db->error);
   }
 
+  function getTotalPrice() {
+    require('db.php');
+    $query = "SELECT FORMAT(SUM(gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?)";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param('ss', $_GET['begin_date'], $_GET['end_date']);
+    $stmt->execute();
+    $stmt->bind_result($grand_total_gaji);
+    $stmt->fetch();
+    ?>
+    <h3>Total: Rp<?php echo $grand_total_gaji; ?></h3>
+    <?php
+  }
+  
   function populateTable() {
     require('db.php');
-    $query = "SELECT id, personal.nama, SUM(gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) GROUP BY id_personal";
+    $query = "SELECT id, personal.nama, FORMAT(SUM(gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ss', $_GET['begin_date'], $_GET['end_date']);
     $stmt->execute();
@@ -167,7 +180,7 @@
      </div>
 
 
-       <h3>Total Rp999K</h3>
+       <?php getTotalPrice() ?>
        <button type="button" class="btn btn-primary">Ekspor CSV</button>
 
       </form>
