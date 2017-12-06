@@ -10,6 +10,14 @@
     $_GET['id_user'] = getNIP();
   }
 ?>
+<?php
+  $query = "SELECT personal.nama, posisi.nama FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id WHERE personal.nip=?";
+  $stmt = $db->prepare($query) or show_error_dialog($db->error);
+  $stmt->bind_param('i', $_GET['id_user']);
+  $stmt->execute();
+  $stmt->bind_result($nama, $posisi);
+  $stmt->fetch();
+?>
 <?php require('header.php') ?>
               <?php if(canEditMaster()) { ?>
               <li>
@@ -51,16 +59,10 @@
         </div>
 
           <div class="form-group col-xs-9">
-            <label for="sel1">Bagian:</label>
-            <select class="form-control" id="wilayah">
-              <option>Musik</option>
-            </select>
+            <label for="sel1">Bagian: </label><span><?php echo $posisi ?></span>
         </div>
           <div class="form-group col-xs-9">
-            <label for="sel1">Nama:</label>
-            <select class="form-control" id="wilayah">
-              <option>Lucky Andi</option>
-            </select>
+            <label for="sel1">Nama: </label><span><?php echo $nama ?></span>
         </div>
         <div class="table-container">
         <table class="table table-hover tablesorter">
