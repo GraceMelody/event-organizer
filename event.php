@@ -159,8 +159,8 @@
                <select class="form-control col-xs-2 hari-tanggal" id="hari" name="hari">
                  <?php populateHari() ?>
                </select>
-                 <input type="text" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Mulai" id="jam_mulai" name="jam_mulai">
-                 <input type="text" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Selesai" id="jam_selesai" name="jam_selesai">
+                 <input type="time" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Mulai" id="jam_mulai" name="jam_mulai">
+                 <input type="time" class="form-control col-xs-2 hari-tanggal" placeholder="Jam Selesai" id="jam_selesai" name="jam_selesai">
                </div>
 
              </div>
