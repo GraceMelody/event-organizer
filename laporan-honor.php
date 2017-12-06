@@ -42,7 +42,7 @@
   
   function populateTable() {
     require('db.php');
-    $query = "SELECT honor.id, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
+    $query = "SELECT personal.nip, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
     $stmt->execute();
