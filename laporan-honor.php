@@ -82,11 +82,12 @@
 
 <script>
   $(document).ready(function() {
-    $('table input[type=checkbox]').click(function() {
-      $.post('event.php', {
-          setActive: $(this).prop('checked') ? 1 : 0,
-          id: $(this).data("id")
-        })
+    $('#begin_date').change(function() {
+      window.location = "laporan-honor.php?begin_date="+$(this).prop("value");
+    })
+    
+    $('#end_date').change(function() {
+      window.location = "laporan-honor.php?begin_date=<?php echo isset($_GET['begin_date']) ? $_GET['begin_date'] : '' ?>&end_date="+$(this).prop("value");
     })
   })
 </script>
@@ -123,8 +124,8 @@
         <div class="row">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel1">
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel2">
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="begin_date" <?php echo isset($_GET['begin_date']) ? "value=\"".$_GET['begin_date']."\"" : '' ?> >
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date" <?php echo isset($_GET['begin_date']) ? '' : 'disabled'  ?> <?php echo isset($_GET['end_date']) ? "value=\"".$_GET['end_date']."\"" : ''?>>
         </div>
 
           <div class="form-group col-xs-9">
