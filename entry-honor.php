@@ -225,7 +225,7 @@
     <div class="row">
       <div class="col-sm-11">
         <h1>Entry Honor</h1>
-        <div class="row1">
+        <div class="padding-padding">
           <div class="form-group col-xs-4">
             <label for="sel1">Wilayah:</label>
             <select class="form-control" id="select_wilayah">
@@ -244,7 +244,7 @@
           </input>
           </div>
         </div>
-        <table class="table table-hover tablesorter">
+      <table class="table table-hover tablesorter">
        <thead>
          <tr class="tabelurut">
            <th>No <span class="glyphicon glyphicon-sort"></th>
@@ -256,7 +256,7 @@
        <tbody>
        <?php populateTable() ?>
        </tbody>
-     </table>
+      </table>
      
        <form action="entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date=<?php echo isset($_GET['event_date']) ? $_GET['event_date'] : '' ?>" method="POST">
         <input type="hidden" name="id_event" value="<?php echo $_GET['id_event']?>">

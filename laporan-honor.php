@@ -117,7 +117,7 @@
     <div class="row">
       <div class="col-sm-11">
         <h1>Laporan Honor</h1>
-        <div class="row2">
+        <div class="padding-padding">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
             <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel1">
@@ -130,6 +130,7 @@
               <option>Musik</option>
             </select>
         </div>
+        <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="tabelurut">
@@ -143,6 +144,7 @@
           <?php populateTable() ?>
        </tbody>
      </table>
+     </div>
 
 
        <h3>Total Rp999K</h3>

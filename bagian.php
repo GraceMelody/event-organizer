@@ -88,7 +88,7 @@
     <div class="row">
       <div class="col-sm-11">
         <h1>Bagian</h1>
-
+        <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
          <tr class="tabelurut">
@@ -101,8 +101,9 @@
          <?php populateTable() ?>
        </tbody>
      </table>
+     </div>
 
-     <div class="row2">
+     <div class="padding-padding">
        <h2>Data baru</h2>
        <form action="bagian.php" method="POST">
          <div class="col-md-11">
