@@ -13,7 +13,6 @@ if (isset($_SESSION['username'])) {
     if ($stmt->fetch()) {
       header("Location: detail.php");
     } else {
-      require('html-header.html');
       show_error_dialog("NIP / Password salah! Silahkan coba kembali.");
     }
     

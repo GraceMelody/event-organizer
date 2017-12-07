@@ -3,6 +3,7 @@
   require('db.php');
   
   function show_error_dialog($msg) {
+    require('html-header.html');
     ?>
     <script>
     $(document).ready(function(){
