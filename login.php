@@ -15,9 +15,9 @@ if (isset($_SESSION['username'])) {
     } else {
       show_error_dialog("NIP / Password salah! Silahkan coba kembali.");
     }
-    
-    
-    
+
+
+
   }
 }
   ?>
@@ -28,19 +28,18 @@ if (isset($_SESSION['username'])) {
 
 <div class="container">
   <div class="text-center">
-    <h1>Event Organizer Management System</h1>
-    <h4>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h4>
+    <h1 class="header-login">Log In to System</h1>
   </div>
   <form action="login.php" method="POST">
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
-      <label for="username">NIP:</label>
-      <input type="number" class="form-control" id="username" name="username">
+      <label for="username" class="field-label">NIP:</label>
+      <input type="number" class="form-control" id="username" name="username" placeholder="NIM">
     </div>
     <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="pwd">
+      <label for="pwd" class="field-label">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="pwd"placeholder="Password">
     </div>
     <button type="submit" class="btn btn-default" name="submit">Login</button>
   </form>
