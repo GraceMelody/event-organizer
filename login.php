@@ -1,5 +1,4 @@
-<?php require("php_header.php") ?>
-
+<?php require("php_header.php")?>
 <?php
 if (isset($_SESSION['username'])) {
   header("Location: detail.php");
@@ -13,61 +12,38 @@ if (isset($_SESSION['username'])) {
     $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['is_honor_editor'], $_SESSION['nip']);
     if ($stmt->fetch()) {
       header("Location: detail.php");
+    } else {
+      show_error_dialog("NIP / Password salah! Silahkan coba kembali.");
     }
-
-
-
+    
+    
+    
   }
 }
   ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Event Organizer Management System</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" type="text/css" href="style1.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="./jquery.tablesorter.min.js"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <script>
-
-  $(document).ready(function(){
-      // Bootstrap tooltip, https://www.w3schools.com/bootstrap/bootstrap_tooltip.asp
-        $('.btn-watch').tooltip();
-      // http://tablesorter.com/docs/
-        $(".tablesorter").tablesorter();
-  });
-
-
-
-
-  </script>
-</head>
+<?php require('html-header.html'); ?>
 <body>
-  <div class="login">
-  <div class="col-lg-12" style="float:none; margin:0 auto;">
-    <h1 class="header-login">Log in to System</h1>
+
+<div class="container">
+  <div class="text-center">
+    <h1>Event Organizer Management System</h1>
+    <h4>Bima, Evans, Grace, Yuan - 311510005, 311710008, 311710010, 311510025</h4>
   </div>
-
-
   <form action="login.php" method="POST">
-    <div class="login">
+    <div class="row">
       <div class="col-md-4 col-md-offset-4">
     <div class="form-group ">
-      <label for="username" class="inputan">NIP:</label>
-      <input type="number" class="form-control" id="username" name="username" placeholder="NIP">
+      <label for="username">NIP:</label>
+      <input type="number" class="form-control" id="username" name="username">
     </div>
     <div class="form-group">
-      <label for="pwd" class="inputan">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="pwd">
     </div>
-    <button type="submit" class="button" name="submit">Log in</button>
+    <button type="submit" class="btn btn-default" name="submit">Login</button>
   </form>
-  </div>
 </div>
-
+</div>
 </body>

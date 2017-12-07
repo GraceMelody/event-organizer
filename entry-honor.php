@@ -28,13 +28,13 @@
 
     $stmt = $db->prepare($query) or die($db->error);
     $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
-    $stmt->execute() or die($db->error);
+    $stmt->execute() or show_error_dialog($db->error);
   }
 
   function populateTable() {
     require('db.php');
     
-    if (isset($_GET['id_wilayah']) && isset($_GET['id_event']) && isset($_GET['event_date'])) {
+    if (!empty($_GET['id_wilayah']) && !empty($_GET['id_event']) && !empty($_GET['event_date'])) {
       $query = "SELECT 
                   honor.id,
                   personal.nama,
@@ -129,7 +129,7 @@
     <?php
     while ($stmt->fetch()) {
       $isSelected = '';
-      if(isset($_GET['id_wilayah'])) {
+      if(!empty($_GET['id_wilayah'])) {
         $isSelected = $_GET['id_wilayah'] == $id ? 'selected' : '';
       }
       
@@ -149,7 +149,7 @@
     <option disabled selected>---</option>
     <?php
     
-    if (!isset($_GET['id_wilayah'])) {
+    if (!!empty($_GET['id_wilayah'])) {
       return;
     }
     
@@ -182,11 +182,11 @@
       window.location = "entry-honor.php?id_wilayah="+$(this).prop("value");
     })
     $('#select_event').change(function() {
-      window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event="+$(this).prop("value");
+      window.location = "entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event="+$(this).prop("value");
     })
     
     $('#select_date').change(function() {
-      window.location = "entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date="+$(this).prop("value");
+      window.location = "entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo !empty($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date="+$(this).prop("value");
     })
     
     $('#posisi').html($('#nama').find(':selected').data('posisi'));
@@ -199,7 +199,7 @@
               <?php if (canEditMaster()) { ?>
               <li>
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
 
 
                  <li><a href="wilayah.php">Wilayah</a></li>
@@ -223,9 +223,10 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Entry Honor</h1>
-        <div class="padding-padding">
+        <div class="row">
           <div class="form-group col-xs-4">
             <label for="sel1">Wilayah:</label>
             <select class="form-control" id="select_wilayah">
@@ -234,19 +235,19 @@
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Event:</label>
-            <select class="form-control" id="select_event" <?php echo !isset($_GET['id_wilayah']) ? 'disabled' : '' ?> >
+            <select class="form-control" id="select_event" <?php echo !!empty($_GET['id_wilayah']) ? 'disabled' : '' ?> >
               <?php populateOptionEvent() ?>
             </select>
           </div>
           <div class="form-group col-xs-4">
             <label for="sel1">Tanggal:</label>
-            <input type="date"  <?php echo !isset($_GET['id_event']) ? 'disabled' : '' ?> class="form-control" id="select_date" <?php echo isset($_GET['event_date']) ? 'value='.$_GET['event_date'] : '' ?>>
+            <input type="date"  <?php echo !!empty($_GET['id_event']) ? 'disabled' : '' ?> class="form-control" id="select_date" <?php echo !empty($_GET['event_date']) ? 'value='.$_GET['event_date'] : '' ?>>
           </input>
           </div>
         </div>
       <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
            <th>Posisi <span class="glyphicon glyphicon-sort"></th>
@@ -258,7 +259,7 @@
        </tbody>
       </table>
      
-       <form action="entry-honor.php?id_wilayah=<?php echo isset($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo isset($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date=<?php echo isset($_GET['event_date']) ? $_GET['event_date'] : '' ?>" method="POST">
+       <form action="entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo !empty($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date=<?php echo !empty($_GET['event_date']) ? $_GET['event_date'] : '' ?>" method="POST">
         <input type="hidden" name="id_event" value="<?php echo $_GET['id_event']?>">
         <input type="hidden" name="event_date" value="<?php echo $_GET['event_date']?>">
         

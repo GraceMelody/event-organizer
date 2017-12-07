@@ -48,7 +48,7 @@
     $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
     $admin_val = isset($_POST['admin']) ? 1 : 0;
     $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
-    $stmt->execute() or die($db->error);
+    $stmt->execute() or show_error_dialog($db->error);
   }
 
   function populateTable() {
@@ -136,7 +136,9 @@
 </script>
               <li class="active">
                 <a href="#">Data Master</a>
-                <ul class="nav-padder">
+                <ul class="nav padder">
+
+
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
@@ -155,12 +157,13 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Personal</h1>
       <div class="table-container">
       <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>NIP <span class="glyphicon glyphicon-sort"></th>
            <th>Nama<span class="glyphicon glyphicon-sort"></th>
            <th>Posisi<span class="glyphicon glyphicon-sort"></th>
@@ -177,7 +180,7 @@
      </table>
      </div>
 
-     <div class="padding-padding">
+     <div class="row">
        <h2>Data baru</h2>
        <form action="personal.php" method="POST">
          <div class="col-md-11">

@@ -3,10 +3,21 @@
   require('db.php');
   
   function show_error_dialog($msg) {
+    require('html-header.html');
     ?>
     <script>
     $(document).ready(function(){
-      alert("<?php echo($msg) ?>");
+      //alert("<?php echo($msg) ?>");
+      $("body").append("<div id='error-dialog'><?php echo $msg ?><div>");
+      $("#error-dialog").dialog({
+        modal: true,
+        title: "Error",
+        buttons: {
+          Ok: function() {
+            $(this).dialog("close");
+          }
+        }
+      });
     })
     </script>
     <?php

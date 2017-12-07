@@ -1,11 +1,3 @@
-@font-face {
-    font-family: HelveticaNeue-Bold;
-    src: url(fonts/circular-bold.woff2);
-}
-@font-face {
-    font-family: HelveticaNeue-Light;
-    src: url(fonts/circular-light.ttf);
-}
 .border-show{
   padding-bottom: 15px;
   border-bottom: 2px solid black;
@@ -54,8 +46,4 @@ ul.padder{
 .pad15{
   margin-left:15px;
   margin-right:15px;
-}
-body {
-  background: rgba(245, 132, 33, .87);
-
 }

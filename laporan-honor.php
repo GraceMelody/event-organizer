@@ -1,5 +1,4 @@
 <?php require('php_header.php') ?>
-
 <?php checkLogin(); ?>
 <?php checkCanCheckLaporanHonor() ?>
 
@@ -28,11 +27,24 @@
     $stmt->execute() or die($db->error);
   }
 
+  function getTotalPrice() {
+    require('db.php');
+    $query = "SELECT FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian = ?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
+    $stmt->execute();
+    $stmt->bind_result($grand_total_gaji);
+    $stmt->fetch();
+    ?>
+    <h3>Total: Rp<?php echo $grand_total_gaji; ?></h3>
+    <?php
+  }
+  
   function populateTable() {
     require('db.php');
-    $query = "SELECT id, personal.nama, SUM(gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip GROUP BY id_personal";
+    $query = "SELECT personal.nip, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    
+    $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $total_gaji);
 
@@ -41,8 +53,8 @@
           <tr>
             <td><?php echo $id ?></td>
             <td><?php echo $nama ?></td>
-            <td><?php echo $total_gaji ?></td>
-            <td><a href="detail.php?id_user=<?php echo $id ?>"class="btn btn-default">Detail</a></td>
+            <td class="text-right"><?php echo $total_gaji ?></td>
+            <td><a href="detail.php?id_user=<?php echo $id ?>&begin_date=<?php echo $_GET['begin_date']?>&end_date=<?php echo $_GET['end_date']?>"class="btn btn-default">Detail</a></td>
           </tr>
     <?php
     }
@@ -76,6 +88,24 @@
       <?php
     }
   }
+  
+  function populateOptionBagian() {
+    require('db.php');
+    $query = "SELECT id, nama FROM bagian WHERE aktif = 1";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->execute();
+    $stmt->bind_result($id, $nama_bagian);
+    ?>
+      <option disabled <?php echo isset($_GET['bagian']) ? '' : 'selected'?> >---</option>
+    <?php
+    while ($stmt->fetch()) {
+      ?>
+
+      <option value="<?php echo $id ?>" <?php if(isset($_GET['bagian'])) {echo $_GET['bagian']==$id ? 'selected' : ''; }?> ><?php echo $nama_bagian ?></option>
+
+      <?php
+    }
+  }
 ?>
 
 <?php require('header.php') ?>
@@ -83,17 +113,39 @@
 
 <script>
   $(document).ready(function() {
-    $('table input[type=checkbox]').click(function() {
-      $.post('event.php', {
-          setActive: $(this).prop('checked') ? 1 : 0,
-          id: $(this).data("id")
-        })
+    
+    //https://css-tricks.com/snippets/jquery/get-query-params-object/
+    jQuery.extend({
+      getQueryParameters : function(str) {
+        return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+      }
+    });
+    
+    $('#begin_date').change(function() {
+      const qs = $.getQueryParameters();
+      qs.begin_date = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
+    })
+    
+    $('#end_date').change(function() {
+      const qs = $.getQueryParameters();
+      qs.end_date = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
+    })
+    
+    $('#select-wilayah').change(function() {
+      const qs = $.getQueryParameters();
+      qs.bagian = $(this).prop("value")
+      window.location = "laporan-honor.php?" + $.param(qs);
     })
   })
 </script>
               <?php if (canEditMaster()) { ?>
-              <li><a href="#">Data Master</a>
-                <ul class="nav-padder">
+              <li>
+                <a href="#">Data Master</a>
+                <ul class="nav padder">
+
+
                  <li><a href="wilayah.php">Wilayah</a></li>
                  <li><a href="event.php">Event</a></li>
                  <li><a href="bagian.php">Bagian</a></li>
@@ -115,25 +167,26 @@
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
-      <div class="col-sm-11">
-        <h1>Laporan Honor</h1>
-        <div class="padding-padding">
+      <div class="col-xs-11">
+      <h4>Welcome, <?php username() ?></h4>
+        <h1>Rekap Honor</h1>
+        <div class="row">
           <div class="form-group">
             <label for="sel1" class="col-lg-2 col-sm-12">Periode:</label>
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel1">
-            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="sel2">
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="begin_date" <?php echo isset($_GET['begin_date']) ? "value=\"".$_GET['begin_date']."\"" : '' ?> >
+            <input type="date" class="form-control pad15 col-sm-12 col-lg-3 periode" id="end_date" <?php echo isset($_GET['end_date']) ? "value=\"".$_GET['end_date']."\"" : ''?>>
         </div>
 
-          <div class="form-group col-sm-9">
+          <div class="form-group col-xs-9">
             <label for="sel1">Bagian:</label>
-            <select class="form-control" id="wilayah">
-              <option>Musik</option>
+            <select class="form-control" id="select-wilayah">
+              <?php populateOptionBagian() ?>
             </select>
         </div>
         <div class="table-container">
         <table class="table table-hover tablesorter">
        <thead>
-         <tr class="tabelurut">
+         <tr class="active">
            <th>No <span class="glyphicon glyphicon-sort"></th>
            <th>Nama <span class="glyphicon glyphicon-sort"></th>
            <th>Total <span class="glyphicon glyphicon-sort"></th>
@@ -147,7 +200,7 @@
      </div>
 
 
-       <h3>Total Rp999K</h3>
+       <?php getTotalPrice() ?>
        <button type="button" class="btn btn-primary">Ekspor CSV</button>
 
       </form>
