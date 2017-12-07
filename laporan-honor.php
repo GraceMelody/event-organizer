@@ -1,9 +1,17 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
 <?php checkCanCheckLaporanHonor() ?>
-
 <?php
 
+  if (isset($_GET['getCSV'])) {
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="rekap-honor.csv"');
+    
+    print "id_user,nama,total_gaji" ."\n";
+    
+    populateTable(true);
+    die();
+  }
   if (isset($_POST['setActive'])) {
     // Set active
     $query = "UPDATE event SET aktif=? WHERE id=?";
@@ -40,23 +48,30 @@
     <?php
   }
   
-  function populateTable() {
+  function populateTable($toCSV=false) {
     require('db.php');
-    $query = "SELECT personal.nip, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
+    $query = "SELECT personal.nip, personal.nama, FORMAT(SUM(honor.gaji), 2, 'de_DE'), SUM(honor.gaji) FROM honor INNER JOIN personal ON id_personal=personal.nip  INNER JOIN posisi ON personal.id_posisi = posisi.id WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND id_bagian=? GROUP BY id_personal";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['bagian']);
     $stmt->execute();
-    $stmt->bind_result($id, $nama, $total_gaji);
+    $stmt->bind_result($id, $nama, $total_gaji, $total_gaji_unformatted);
 
-    while ($stmt->fetch()) {
-    ?>
-          <tr>
-            <td><?php echo $id ?></td>
-            <td><?php echo $nama ?></td>
-            <td class="text-right"><?php echo $total_gaji ?></td>
-            <td><a href="detail.php?id_user=<?php echo $id ?>&begin_date=<?php echo $_GET['begin_date']?>&end_date=<?php echo $_GET['end_date']?>"class="btn btn-default">Detail</a></td>
-          </tr>
-    <?php
+    if ($toCSV) {
+      while ($stmt->fetch()) {
+        print $id . "," . $nama . "," . $total_gaji_unformatted. "\n";
+      }
+      
+    } else {
+      while ($stmt->fetch()) {
+      ?>
+            <tr>
+              <td><?php echo $id ?></td>
+              <td><?php echo $nama ?></td>
+              <td class="text-right"><?php echo $total_gaji ?></td>
+              <td><a href="detail.php?id_user=<?php echo $id ?>&begin_date=<?php echo $_GET['begin_date']?>&end_date=<?php echo $_GET['end_date']?>"class="btn btn-default">Detail</a></td>
+            </tr>
+      <?php
+      }
     }
   }
 
@@ -139,6 +154,13 @@
       window.location = "laporan-honor.php?" + $.param(qs);
     })
   })
+  
+  function getCSV() {
+    const qs = $.getQueryParameters();
+    qs.getCSV = 1;
+    const url = "laporan-honor.php?" + $.param(qs);
+    window.location=url;
+  }
 </script>
               <?php if (canEditMaster()) { ?>
               <li>
@@ -201,7 +223,7 @@
 
 
        <?php getTotalPrice() ?>
-       <button type="button" class="btn btn-primary">Ekspor CSV</button>
+       <button type="button" class="btn btn-primary" onclick="getCSV()">Ekspor CSV</button>
 
       </form>
     </div>
