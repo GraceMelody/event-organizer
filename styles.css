@@ -75,5 +75,15 @@ ul.padder{
   margin-bottom: .5em;
 }
 .btn.btn-default{
-  background-color: 
+  background-color:
+}
+.btn-login{
+  color: rgba(255, 255, 255, 1);
+  width: 6em;
+  font-family: HelveticaNeue-Bold;
+  font-weight: 100;
+  font-size: 1.75em;
+  border: 1px solid rgba(255, 255, 255, .75);
+  background: transparent;
+  border-radius: .65em;
 }

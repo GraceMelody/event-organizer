@@ -41,7 +41,7 @@ if (isset($_SESSION['username'])) {
       <label for="pwd" class="field-label">Password:</label>
       <input type="password" class="form-control" id="pwd" name="pwd"placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-default" name="submit">Login</button>
+    <button type="submit" class="btn btn-login" name="submit">Log In</button>
   </form>
 </div>
 </div>
