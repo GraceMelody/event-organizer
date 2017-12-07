@@ -51,7 +51,7 @@
       $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
       $admin_val = isset($_POST['admin']) ? 1 : 0;
       $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
-      $stmt->execute() or show_error_dialog($db->error);
+      $stmt->execute() or show_error_dialog("NIP yang dimasukkan sudah terdaftar");
     }
   }
 
