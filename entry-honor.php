@@ -18,17 +18,18 @@
   
   if (isset($_POST['submit'])) {
     // Tambah event
-    
-    
-    $query = "INSERT INTO honor 
-    (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user)
-    SELECT ?, ?, personal.id_posisi, ?, posisi.gaji, ?
-    FROM posisi INNER JOIN personal ON personal.id_posisi=posisi.id
-    WHERE personal.nip=?";
+    if (empty($_POST['event_date']) ) {
+    } else {
+      $query = "INSERT INTO honor 
+      (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user)
+      SELECT ?, ?, personal.id_posisi, ?, posisi.gaji, ?
+      FROM posisi INNER JOIN personal ON personal.id_posisi=posisi.id
+      WHERE personal.nip=?";
 
-    $stmt = $db->prepare($query) or die($db->error);
-    $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
-    $stmt->execute() or show_error_dialog($db->error);
+      $stmt = $db->prepare($query) or die($db->error);
+      $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
+      $stmt->execute() or show_error_dialog($db->error);
+    }
   }
 
   function populateTable() {
