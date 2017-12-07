@@ -7,8 +7,9 @@
     src: url(fonts/circular-light.ttf);
 }
 body{
-  background-color: rgba(245, 132, 33, .87);
-
+  background-color:	#402108;
+  color: #fdaf3e !important;
+  font-family: HelveticaNeue-light;
 }
 .border-show{
   padding-bottom: 15px;
@@ -32,15 +33,18 @@ body{
 .navbar .container-fluid,
 .navbar .navbar-collapse
 {
-  background-color:rgba(224, 110, 11, 1);
+  background-color: 	#bd6416;
   padding: 0;
+  border-radius: 13px;
 }
-
 li.active{
-  background-color: rgba(248, 174, 109, 1));
+  background-color: 	#ff9300;
+}
+.nav li a:hover{
+  background-color: #fbf23d;
 }
 li.active.inner{
-  background-color: rgba(248, 174, 109, 1);
+  background-color: #ffaf04);
 }
 ul.padder{
   padding-left:10px;
@@ -87,4 +91,10 @@ ul.padder{
   border: 1px solid rgba(255, 255, 255, .75);
   background: transparent;
   border-radius: .65em;
+}
+.nav>li>a{
+  color: white;
+}
+body > div > div.col-xs-12.col-sm-3 > nav{
+  background-color:rgba(0,0,0,0);
 }
