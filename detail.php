@@ -1,6 +1,6 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
-<?php 
+<?php  
   if (!isset($_GET['id_user'])) {
     $_GET['id_user'] = getNIP();
   }
@@ -8,6 +8,15 @@
   if (!canCheckLaporanHonor()) {
     // You can only see yours...
     $_GET['id_user'] = getNIP();
+  }
+  
+  if (isset($_GET['getCSV'])) {
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="detail-honor.csv"');
+    
+    print "id, posisi, wilayah, event, date, gaji" . "\n";
+    populateTable(true);
+    die();
   }
 ?>
 <?php 
@@ -27,9 +36,9 @@
     <h3>Total: Rp<?php echo $grand_total_gaji; ?></h3>
     <?php
   }
-  function populateTable() {
+  function populateTable($toCSV=false) {
     require('db.php');
-    $query = "SELECT honor.id, posisi.nama, wilayah.nama, event.nama, DATE(honor.tanggal_event), FORMAT(honor.gaji, 2, 'de_DE') FROM honor
+    $query = "SELECT honor.id, posisi.nama, wilayah.nama, event.nama, DATE(honor.tanggal_event), FORMAT(honor.gaji, 2, 'de_DE'), honor.gaji FROM honor
     INNER JOIN posisi ON honor.id_posisi = posisi.id
     INNER JOIN event ON honor.id_event = event.id
     INNER JOIN wilayah ON event.id_wilayah = wilayah.id
@@ -37,19 +46,26 @@
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['id_user']);
     $stmt->execute();
-    $stmt->bind_result($id, $posisi, $wilayah, $event, $date, $gaji);
+    $stmt->bind_result($id, $posisi, $wilayah, $event, $date, $gaji, $total_gaji_unformatted);
 
-    while ($stmt->fetch()) {
-    ?>
-          <tr>
-            <td><?php echo $id ?></td>
-            <td><?php echo $posisi ?></td>
-            <td><?php echo $wilayah ?></td>
-            <td><?php echo $event ?></td>
-            <td><?php echo $date ?></td>
-            <td class="text-right"><?php echo $gaji ?></td>
-          </tr>
-    <?php
+    if ($toCSV) {
+      while ($stmt->fetch()) {
+        print $id . "," . $posisi . "," . $wilayah . "," . $event . "," . $date . "," . $total_gaji_unformatted. "\n";
+      }
+      
+    } else {
+      while ($stmt->fetch()) {
+      ?>
+            <tr>
+              <td><?php echo $id ?></td>
+              <td><?php echo $posisi ?></td>
+              <td><?php echo $wilayah ?></td>
+              <td><?php echo $event ?></td>
+              <td><?php echo $date ?></td>
+              <td class="text-right"><?php echo $gaji ?></td>
+            </tr>
+      <?php
+      }
     }
   }
   
@@ -84,6 +100,12 @@
       window.location = "detail.php?" + $.param(qs);
     })
   })
+  function getCSV() {
+    const qs = $.getQueryParameters();
+    qs.getCSV = 1;
+    const url = "detail.php?" + $.param(qs);
+    window.location=url;
+  }
 </script>
               <?php if(canEditMaster()) { ?>
               <li>
@@ -151,8 +173,7 @@
 
 
        <?php getTotalPrice() ?>
-       <button type="button" class="btn btn-primary">Ekspor PDF</button>
-       <button type="button" class="btn btn-primary">Kirim Ke</button>
+       <button type="button" class="btn btn-primary" onclick="getCSV()">Ekspor CSV</button>
 
       </form>
     </div>
