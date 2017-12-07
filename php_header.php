@@ -11,6 +11,11 @@
       $("#error-dialog").dialog({
         modal: true,
         title: "Error",
+        buttons: {
+          Ok: function() {
+            $(this).dialog("close");
+          }
+        }
       });
     })
     </script>

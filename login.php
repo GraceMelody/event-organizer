@@ -12,6 +12,9 @@ if (isset($_SESSION['username'])) {
     $stmt->bind_result($_SESSION['username'], $_SESSION['is_koordinator'], $_SESSION['is_admin'], $_SESSION['is_honor_editor'], $_SESSION['nip']);
     if ($stmt->fetch()) {
       header("Location: detail.php");
+    } else {
+      require('html-header.html');
+      show_error_dialog("NIP / Password salah! Silahkan coba kembali.");
     }
     
     
@@ -21,30 +24,7 @@ if (isset($_SESSION['username'])) {
   ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Event Organizer Management System</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="./jquery.tablesorter.min.js"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <script>
-
-  $(document).ready(function(){
-      // Bootstrap tooltip, https://www.w3schools.com/bootstrap/bootstrap_tooltip.asp
-        $('.btn-watch').tooltip();
-      // http://tablesorter.com/docs/
-        $(".tablesorter").tablesorter();
-  });
-
-
-
-
-  </script>
-</head>
+<?php require('html-header.html'); ?>
 <body>
 
 <div class="container">
