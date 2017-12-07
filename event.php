@@ -17,13 +17,16 @@
   
   if (isset($_POST['submit'])) {
     // Tambah event
+    if (empty($_POST['nama_event']) || empty($_POST['id_wilayah']) || empty($_POST['hari']) || empty($_POST['jam_mulai'] || empty($_POST['jam_selesai']))) {
+      show_error_dialog("Semua field harus diisi!");
+    } else {
+      $query = "INSERT INTO event (nama, id_wilayah, hari, waktu_mulai, waktu_selesai, aktif) VALUES (?, ?, ?, ?, ?, ?)";
 
-    $query = "INSERT INTO event (nama, id_wilayah, hari, waktu_mulai, waktu_selesai, aktif) VALUES (?, ?, ?, ?, ?, ?)";
-
-    $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $true_bool = true;
-    $stmt->bind_param("sisssi", $_POST['nama_event'], $_POST['id_wilayah'], $_POST['hari'], $_POST['jam_mulai'], $_POST['jam_selesai'], $true_bool);
-    $stmt->execute() or die($db->error);
+      $stmt = $db->prepare($query) or show_error_dialog($db->error);
+      $true_bool = true;
+      $stmt->bind_param("sisssi", $_POST['nama_event'], $_POST['id_wilayah'], $_POST['hari'], $_POST['jam_mulai'], $_POST['jam_selesai'], $true_bool);
+      $stmt->execute() or die($db->error);
+    }
   }
 
   function populateTable() {

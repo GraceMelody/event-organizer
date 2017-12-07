@@ -17,13 +17,16 @@
   
   if (isset($_POST['submit'])) {
     // Tambah bagian
+    if (empty($_POST['nama_bagian'])) {
+      show_error_dialog("Semua field harus diisi!");
+    } else {
+      $query = "INSERT INTO bagian (nama, aktif) VALUES (?, ?)";
 
-    $query = "INSERT INTO bagian (nama, aktif) VALUES (?, ?)";
-
-    $stmt = $db->prepare($query) or show_error_dialog($db->error);
-    $true_bool = true;
-    $stmt->bind_param("si", $_POST['nama_bagian'], $true_bool);
-    $stmt->execute();
+      $stmt = $db->prepare($query) or show_error_dialog($db->error);
+      $true_bool = true;
+      $stmt->bind_param("si", $_POST['nama_bagian'], $true_bool);
+      $stmt->execute();
+    }
   }
 
   function populateTable() {
