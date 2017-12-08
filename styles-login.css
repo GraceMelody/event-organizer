@@ -6,6 +6,10 @@
     font-family: HelveticaNeue-Light;
     src: url(fonts/circular-light.ttf);
 }
+@font-face {
+    font-family: Header;
+    src: url(fonts/header.otf);
+}
 .container-fluid.main{
   position: relative;
   padding: 0;
@@ -176,7 +180,7 @@ body > div.covertext > div.col-xs-12.explore > a > button{
 
 
 .title {
-  font-family: HelveticaNeue-Bold;
+  font-family: header;
   font-weight: 600;
   font-size: 60px;
   color: #ffffff;

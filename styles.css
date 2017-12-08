@@ -78,7 +78,7 @@ ul.padder{
 }
 
 .header-login {
-  font-family: HelveticaNeue-Bold;
+  font-family: header;
   font-weight: 200;
   font-size: 3.5em;
   color: #fff;
@@ -182,4 +182,7 @@ body > nav > div > div > a.navbar-brand{
 }
 .input-part{
   border-top:1px solid rgba(245, 132, 33, .87);
+}
+body.login-page{
+  background: rgba(245, 132, 33, .87);
 }

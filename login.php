@@ -24,7 +24,7 @@ if (isset($_SESSION['username'])) {
 <!DOCTYPE html>
 <html lang="en">
 <?php require('html-header.html'); ?>
-<body>
+<body class="login-page">
 
 <div class="container">
   <div class="text-center">
