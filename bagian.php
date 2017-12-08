@@ -14,7 +14,7 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah bagian
     if (empty($_POST['nama_bagian'])) {
@@ -106,7 +106,7 @@
      </table>
      </div>
 
-     <div class="row">
+     <div class="row input-part">
        <h2>Data baru</h2>
        <form action="bagian.php" method="POST">
          <div class="col-md-11">

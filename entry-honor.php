@@ -15,12 +15,12 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah event
-    
-    
-    $query = "INSERT INTO honor 
+
+
+    $query = "INSERT INTO honor
     (id_event, id_personal, id_posisi, tanggal_event, honor.gaji, entry_user)
     SELECT ?, ?, personal.id_posisi, ?, posisi.gaji, ?
     FROM posisi INNER JOIN personal ON personal.id_posisi=posisi.id
@@ -33,9 +33,9 @@
 
   function populateTable() {
     require('db.php');
-    
+
     if (!empty($_GET['id_wilayah']) && !empty($_GET['id_event']) && !empty($_GET['event_date'])) {
-      $query = "SELECT 
+      $query = "SELECT
                   honor.id,
                   personal.nama,
                   posisi.nama
@@ -55,7 +55,7 @@
     } else {
       return;
     }
-    
+
     $stmt->execute();
     $stmt->bind_result($id, $nama_personal, $posisi);
 
@@ -70,7 +70,7 @@
     <?php
     }
   }
-  
+
   function populateHari() {
     ?>
     <option value="Senin">Senin</option>
@@ -82,9 +82,9 @@
     <option value="Minggu">Minggu</option>
     <?php
   }
-  
+
   function populateOptionPerson() {
-    
+
     require('db.php');
     $query = "SELECT nip, personal.nama, posisi.nama FROM personal INNER JOIN posisi on id_posisi=posisi.id WHERE personal.aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
@@ -93,15 +93,15 @@
 
     while ($stmt->fetch()) {
       ?>
-      
+
       <option data-posisi="<?php echo $posisi ?>" value="<?php echo $id ?>"><?php echo $nama ?></option>
-      
+
       <?php
     }
   }
-  
+
   function populateOptionPosisi() {
-    
+
     require('db.php');
     $query = "SELECT id, nama FROM posisi WHERE aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
@@ -111,13 +111,13 @@
     while ($stmt->fetch()) {
       ?>
       <option value="<?php echo $id ?>"><?php echo $nama ?></option>
-      
+
       <?php
     }
   }
-  
+
   function populateOptionWilayah() {
-    
+
     require('db.php');
     $query = "SELECT id, nama FROM wilayah WHERE aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
@@ -132,42 +132,42 @@
       if(!empty($_GET['id_wilayah'])) {
         $isSelected = $_GET['id_wilayah'] == $id ? 'selected' : '';
       }
-      
+
       ?>
-      
+
       <option value="<?php echo $id ?>" <?php echo $isSelected ?>><?php echo $nama_wilayah ?></option>
-      
+
       <?php
     }
   }
-  
+
   function populateOptionEvent() {
     require('db.php');
-    
-    
+
+
     ?>
     <option disabled selected>---</option>
     <?php
-    
+
     if (!!empty($_GET['id_wilayah'])) {
       return;
     }
-    
+
     $query = "SELECT id, nama FROM event WHERE aktif = 1 AND id_wilayah = ".$_GET['id_wilayah'];
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama);
-    
-    
+
+
     while ($stmt->fetch()) {
-      
+
         $isSelected = $_GET['id_event'] == $id ? 'selected' : '';
-      
-      
+
+
       ?>
-      
+
       <option value="<?php echo $id ?>" <?php echo $isSelected ?>><?php echo $nama ?></option>
-      
+
       <?php
     }
   }
@@ -184,16 +184,16 @@
     $('#select_event').change(function() {
       window.location = "entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event="+$(this).prop("value");
     })
-    
+
     $('#select_date').change(function() {
       window.location = "entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo !empty($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date="+$(this).prop("value");
     })
-    
+
     $('#posisi').html($('#nama').find(':selected').data('posisi'));
     $('#nama').change(function() {
       $('#posisi').html($(this).find(':selected').data('posisi'));
     })
-    
+
   })
 </script>
               <?php if (canEditMaster()) { ?>
@@ -257,12 +257,13 @@
        <?php populateTable() ?>
        </tbody>
       </table>
-     
+
        <form action="entry-honor.php?id_wilayah=<?php echo !empty($_GET['id_wilayah']) ? $_GET['id_wilayah'] : '' ?>&id_event=<?php echo !empty($_GET['id_event']) ? $_GET['id_event'] : '' ?>&event_date=<?php echo !empty($_GET['event_date']) ? $_GET['event_date'] : '' ?>" method="POST">
         <input type="hidden" name="id_event" value="<?php echo $_GET['id_event']?>">
         <input type="hidden" name="event_date" value="<?php echo $_GET['event_date']?>">
-        
-         <div class="col-md-9">
+
+         <div class="row input-part">
+           <h1>Tambah Entry</h1>
           <div class="form-group">
             <label for="nama">Nama:</label>
             <select class="form-control" id="nama" name="id_personal">

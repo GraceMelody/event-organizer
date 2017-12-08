@@ -13,7 +13,7 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah wilayah
     if (empty($_POST['nama_wilayah'])) {
@@ -105,7 +105,7 @@
      </table>
      </div>
 
-<div class="row">
+<div class="row input-part">
 <h2>Data baru</h2>
        <form action="wilayah.php" method="POST">
          <div class="col-md-11">

@@ -12,7 +12,7 @@
 }
 body{
   background-color:	#f3f3f3;
-  color: #fdaf3e !important;
+  color: #ae590f !important;
   font-family: HelveticaNeue-light;
 }
 .border-show{
@@ -48,8 +48,15 @@ li.active{
 .nav li a:hover{
   background-color: #fbf23d;
 }
-li.active.inner{
-  background-color: #ffaf04);
+#myNavbar > ul > li.active > ul > li.active.inner{
+  background-color: #ffa934;
+}
+body > div > div.col-xs-12.col-sm-9.content > div > div > div.table-container > table > tbody{
+  background: #ffe2ba;
+}
+body > div > div.col-xs-12.col-sm-9.content > div > div > div.table-container > table > tbody > tr >td{
+  border-color: #f58625 !important;
+
 }
 ul.padder{
   padding-left:10px;
@@ -167,4 +174,12 @@ body > nav > div > div > a.navbar-brand{
   background-color: #f9e988;
   padding-bottom: 20px;
 
+}
+.table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active{
+  background: rgba(245, 132, 33, .87);
+  color: white;
+  border-color: #f58625 !important;
+}
+.input-part{
+  border-top:1px solid rgba(245, 132, 33, .87);
 }

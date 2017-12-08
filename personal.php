@@ -10,7 +10,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setEntryHonor'])) {
     // Set active
     $query = "UPDATE personal SET entry_honor=? WHERE nip=?";
@@ -19,7 +19,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setKoordinator'])) {
     // Set active
     $query = "UPDATE personal SET koordinator=? WHERE nip=?";
@@ -28,7 +28,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setAdmin'])) {
     // Set active
     $query = "UPDATE personal SET admin=? WHERE nip=?";
@@ -111,21 +111,21 @@
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-entry-honor').click(function() {
       $.post('personal.php', {
           setEntryHonor: $(this).prop('checked') ? 1 : 0,
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-koordinator').click(function() {
       $.post('personal.php', {
           setKoordinator: $(this).prop('checked') ? 1 : 0,
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-admin').click(function() {
       $.post('personal.php', {
           setAdmin: $(this).prop('checked') ? 1 : 0,
@@ -158,7 +158,7 @@
   <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+
         <h1>Personal</h1>
       <div class="table-container">
       <table class="table table-hover tablesorter">
@@ -180,7 +180,7 @@
      </table>
      </div>
 
-     <div class="row">
+     <div class="row input-part">
        <h2>Data baru</h2>
        <form action="personal.php" method="POST">
          <div class="col-md-11">
