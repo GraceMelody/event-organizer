@@ -6,7 +6,7 @@
   <nav class="navbar navbar-inverse topnav-styler">
   <div class="container-fluid topnav-styler">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">EOMS</a>
+      <a class="navbar-brand">EO Management System</a>
     </div>
 
     <ul class="nav navbar-nav navbar-right">
@@ -19,12 +19,12 @@
 
 
   <div class="col-xs-12 col-sm-3">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default ">
       <div class="container-fluid">
           <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <div class="collapse navbar-collapse s" id="myNavbar">
+          <div class="collapse navbar-collapse box-shader" id="myNavbar">
             <ul class="nav">
