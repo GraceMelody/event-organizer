@@ -35,7 +35,6 @@ body{
 {
   background-color: 	#bd6416;
   padding: 0;
-  border-radius: 13px;
 }
 li.active{
   background-color: 	#ff9300;
@@ -106,4 +105,40 @@ body > div > div.col-xs-12.col-sm-3 > nav{
 }
 .because-desperation-thats-why{
   color: transparent !important;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable > div.ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle{
+  background-color: firebrick;
+  color: white;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable{
+  font-family: HelveticaNeue-light;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button{
+  border-radius:8px;
+  background-color: grey;
+  box-shadow: 0px;
+  border:0;
+  color: white;
+
+}
+body > div > nav.topnav-styler{
+  background-color: black;
+}
+body > div > nav > div{
+border-radius:0px;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  background-color: #fdaf3e;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+  margin-left: 10px;
+}
+body > nav > div > ul.nav.navbar-nav.navbar-right{
+
+    margin-right: 10px;
+    padding-right: 15px;
+
+}
+body > nav > div.container-fluid.topnav-styler a{
+  color: white !important;
 }
