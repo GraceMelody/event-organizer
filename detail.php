@@ -1,16 +1,16 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
-<?php
+<?php 
   if (!isset($_GET['id_user'])) {
     $_GET['id_user'] = getNIP();
   }
-
+  
   if (!canCheckLaporanHonor()) {
     // You can only see yours...
     $_GET['id_user'] = getNIP();
   }
 ?>
-<?php
+<?php 
   function getTotalPrice() {
     require('db.php');
     $query = "SELECT FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor
@@ -52,7 +52,7 @@
     <?php
     }
   }
-
+  
 ?>
 <?php
   $query = "SELECT personal.nama, posisi.nama FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id WHERE personal.nip=?";
@@ -71,13 +71,13 @@
         return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
       }
     });
-
+    
     $('#begin_date').change(function() {
       const qs = $.getQueryParameters();
       qs.begin_date = $(this).prop("value")
       window.location = "detail.php?" + $.param(qs);
     })
-
+    
     $('#end_date').change(function() {
       const qs = $.getQueryParameters();
       qs.end_date = $(this).prop("value")
@@ -115,11 +115,7 @@
   <div class="col-xs-12 col-sm-9">
     <div class="row">
       <div class="col-xs-11">
-        <div class="row">
-          <h4 class="col-xs-5">Welcome, <?php username() ?>.</h4>
-          <a href="logout.php"><span class="btn col-xs-4 glyphicon glyphicon-log-out"></span> Log Out</a>
-        </div>
-
+      <h4>Welcome, <?php username() ?></h4>
         <h1>Detail Honor</h1>
         <div class="row">
           <div class="form-group">
