@@ -272,7 +272,7 @@
               <label>Posisi:</label> <span id="posisi">ASDF</span>
             </div>
           </div>
-          <div class="col-md-2 col-md-offset-9">
+          <div class="col-md-2 col-md-offset-11">
             <button type="submit" class="btn btn-success" name="submit">Tambah</button>
           </div>
 
