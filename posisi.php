@@ -13,28 +13,28 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah wilayah
     if (empty($_POST['nama_bagian']) || empty($_POST['id_bagian']) || empty($_POST['gaji'])) {
       show_error_dialog("Semua field harus diisi!");
     } else {
       $query = "INSERT INTO posisi (nama, id_bagian, gaji, aktif) VALUES (?, ?, ?, ?)";
-      
+
       $stmt = $db->prepare($query) or show_error_dialog($db->error);
       $true_bool = true;
       $stmt->bind_param("sisi", $_POST['nama_bagian'], $_POST['id_bagian'], $_POST['gaji'], $true_bool);
       $stmt->execute();
     }
   }
-  
+
   function populateTable() {
     require('db.php');
     $query = "SELECT posisi.id, posisi.nama nama, bagian.nama bagian, FORMAT(gaji, 2, 'de_DE'), posisi.aktif FROM posisi INNER JOIN bagian ON id_bagian=bagian.id";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->execute();
     $stmt->bind_result($id, $nama, $bagian, $gaji, $aktif);
-    
+
     while ($stmt->fetch()) {
     ?>
        <tr>
@@ -52,7 +52,7 @@
     <?php
     }
   }
-  
+
   function populateListBagian() {
     require('db.php');
     $query = "SELECT id, nama FROM bagian where aktif=1";
@@ -96,16 +96,15 @@
               <li><a href="entry-honor.php">Entry Honor</a></li>
               <li><a href="laporan-honor.php">Laporan Honor</a></li>
               <li><a href="detail.php">Detail Honor</a></li>
-              
+
             </ul>
         </div>
       </div>
     </nav>
   </div>
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
         <h1>Posisi</h1>
         <div class="table-container">
         <table class="table table-hover tablesorter">
@@ -124,7 +123,7 @@
      </table>
      </div>
 
-<div class="row">
+<div class="row input-area">
 <h2>Data baru</h2>
        <form action="posisi.php" method="POST">
          <div class="col-md-11">

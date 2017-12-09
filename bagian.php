@@ -14,7 +14,7 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah bagian
     if (empty($_POST['nama_bagian'])) {
@@ -87,10 +87,9 @@
       </div>
     </nav>
   </div>
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php echo $_SESSION['username'] ?></h4>
         <h1>Bagian</h1>
         <div class="table-container">
         <table class="table table-hover tablesorter">
@@ -107,7 +106,7 @@
      </table>
      </div>
 
-     <div class="row">
+     <div class="row input-part">
        <h2>Data baru</h2>
        <form action="bagian.php" method="POST">
          <div class="col-md-11">

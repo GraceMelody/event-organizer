@@ -10,7 +10,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setEntryHonor'])) {
     // Set active
     $query = "UPDATE personal SET entry_honor=? WHERE nip=?";
@@ -19,7 +19,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setKoordinator'])) {
     // Set active
     $query = "UPDATE personal SET koordinator=? WHERE nip=?";
@@ -28,7 +28,7 @@
     $stmt->execute();
     die();
   }
-  
+
   if (isset($_POST['setAdmin'])) {
     // Set active
     $query = "UPDATE personal SET admin=? WHERE nip=?";
@@ -40,19 +40,15 @@
 
   if (isset($_POST['submit'])) {
     // Tambah event
-    if (empty($_POST['nip']) || empty($_POST['id_posisi'] || empty($_POST['email']) || empty($_POST['hp']) || empty($_POST['rekening']))) {
-      show_error_dialog("Semua field harus diisi!");
-    } else {
-      $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
+    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
 
-      $stmt = $db->prepare($query) or die($db->error);
-      $true_bool = true;
-      $entry_honor_val = isset($_POST['entry-honor']) ? 1 : 0;
-      $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
-      $admin_val = isset($_POST['admin']) ? 1 : 0;
-      $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
-      $stmt->execute() or show_error_dialog("NIP yang dimasukkan sudah terdaftar");
-    }
+    $stmt = $db->prepare($query) or die($db->error);
+    $true_bool = true;
+    $entry_honor_val = isset($_POST['entry-honor']) ? 1 : 0;
+    $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
+    $admin_val = isset($_POST['admin']) ? 1 : 0;
+    $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
+    $stmt->execute() or show_error_dialog($db->error);
   }
 
   function populateTable() {
@@ -115,21 +111,21 @@
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-entry-honor').click(function() {
       $.post('personal.php', {
           setEntryHonor: $(this).prop('checked') ? 1 : 0,
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-koordinator').click(function() {
       $.post('personal.php', {
           setKoordinator: $(this).prop('checked') ? 1 : 0,
           nip: $(this).data("nip")
         })
     })
-    
+
     $('table input[type=checkbox].check-admin').click(function() {
       $.post('personal.php', {
           setAdmin: $(this).prop('checked') ? 1 : 0,
@@ -159,10 +155,10 @@
       </div>
     </nav>
   </div>
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+
         <h1>Personal</h1>
       <div class="table-container">
       <table class="table table-hover tablesorter">
@@ -184,7 +180,7 @@
      </table>
      </div>
 
-     <div class="row">
+     <div class="row input-part">
        <h2>Data baru</h2>
        <form action="personal.php" method="POST">
          <div class="col-md-11">

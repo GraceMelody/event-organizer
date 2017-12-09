@@ -14,7 +14,7 @@
     echo $_POST['id'];
     die();
   }
-  
+
   if (isset($_POST['submit'])) {
     // Tambah event
     if (empty($_POST['nama_event']) || empty($_POST['id_wilayah']) || empty($_POST['hari']) || empty($_POST['jam_mulai'] || empty($_POST['jam_selesai']))) {
@@ -51,7 +51,7 @@
     <?php
     }
   }
-  
+
   function populateHari() {
     ?>
     <option value="Senin">Senin</option>
@@ -63,9 +63,9 @@
     <option value="Minggu">Minggu</option>
     <?php
   }
-  
+
   function populateOptionWilayah() {
-    
+
     require('db.php');
     $query = "SELECT id, nama FROM wilayah WHERE aktif = 1";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
@@ -74,9 +74,9 @@
 
     while ($stmt->fetch()) {
       ?>
-      
+
       <option value="<?php echo $id ?>"><?php echo $nama_wilayah ?></option>
-      
+
       <?php
     }
   }
@@ -117,10 +117,9 @@
       </div>
     </nav>
   </div>
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
         <h1>Event</h1>
         <div class="table-container">
         <table class="table table-hover tablesorter">
@@ -140,7 +139,7 @@
      </table>
      </div>
 
-     <div class="row">
+     <div class="row input-part">
        <h2>Data baru</h2>
        <form action="event.php" method="POST">
          <div class="col-md-11">

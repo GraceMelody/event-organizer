@@ -1,10 +1,10 @@
 <?php require('php_header.php') ?>
 <?php checkLogin(); ?>
-<?php  
+<?php
   if (!isset($_GET['id_user'])) {
     $_GET['id_user'] = getNIP();
   }
-  
+
   if (!canCheckLaporanHonor()) {
     // You can only see yours...
     $_GET['id_user'] = getNIP();
@@ -19,7 +19,7 @@
     die();
   }
 ?>
-<?php 
+<?php
   function getTotalPrice() {
     require('db.php');
     $query = "SELECT FORMAT(SUM(honor.gaji), 2, 'de_DE') FROM honor
@@ -49,26 +49,26 @@
     $stmt->bind_result($id, $posisi, $wilayah, $event, $date, $gaji, $total_gaji_unformatted);
 
     if ($toCSV) {
-      while ($stmt->fetch()) {
-        print $id . "," . $posisi . "," . $wilayah . "," . $event . "," . $date . "," . $total_gaji_unformatted. "\n";
-      }
-      
-    } else {
-      while ($stmt->fetch()) {
-      ?>
-            <tr>
-              <td><?php echo $id ?></td>
-              <td><?php echo $posisi ?></td>
-              <td><?php echo $wilayah ?></td>
-              <td><?php echo $event ?></td>
-              <td><?php echo $date ?></td>
-              <td class="text-right"><?php echo $gaji ?></td>
-            </tr>
-      <?php
-      }
-    }
+       while ($stmt->fetch()) {
+         print $id . "," . $posisi . "," . $wilayah . "," . $event . "," . $date . "," . $total_gaji_unformatted. "\n";
+       }
+       
+     } else {
+        while ($stmt->fetch()) {
+        ?>
+              <tr>
+                <td><?php echo $id ?></td>
+                <td><?php echo $posisi ?></td>
+                <td><?php echo $wilayah ?></td>
+                <td><?php echo $event ?></td>
+                <td><?php echo $date ?></td>
+                <td class="text-right"><?php echo $gaji ?></td>
+              </tr>
+        <?php
+        }
+     }
   }
-  
+
 ?>
 <?php
   $query = "SELECT personal.nama, posisi.nama FROM personal INNER JOIN posisi ON personal.id_posisi=posisi.id WHERE personal.nip=?";
@@ -87,13 +87,13 @@
         return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
       }
     });
-    
+
     $('#begin_date').change(function() {
       const qs = $.getQueryParameters();
       qs.begin_date = $(this).prop("value")
       window.location = "detail.php?" + $.param(qs);
     })
-    
+
     $('#end_date').change(function() {
       const qs = $.getQueryParameters();
       qs.end_date = $(this).prop("value")
@@ -101,11 +101,11 @@
     })
   })
   function getCSV() {
-    const qs = $.getQueryParameters();
-    qs.getCSV = 1;
-    const url = "detail.php?" + $.param(qs);
-    window.location=url;
-  }
+     const qs = $.getQueryParameters();
+     qs.getCSV = 1;
+     const url = "detail.php?" + $.param(qs);
+     window.location=url;
+   }
 </script>
               <?php if(canEditMaster()) { ?>
               <li>
@@ -134,10 +134,10 @@
       </div>
     </nav>
   </div>
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-xs-12 col-sm-9 content">
     <div class="row">
       <div class="col-xs-11">
-      <h4>Welcome, <?php username() ?></h4>
+
         <h1>Detail Honor</h1>
         <div class="row">
           <div class="form-group">

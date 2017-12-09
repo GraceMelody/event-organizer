@@ -1,10 +1,25 @@
+@font-face {
+    font-family: HelveticaNeue-Bold;
+    src: url(fonts/circular-bold.woff2);
+}
+@font-face {
+    font-family: HelveticaNeue-Light;
+    src: url(fonts/circular-light.ttf);
+}
+@font-face {
+    font-family: Header;
+    src: url(fonts/header.otf);
+}
+body{
+  background-color:	#f3f3f3;
+  color: #ae590f !important;
+  font-family: HelveticaNeue-light;
+}
 .border-show{
   padding-bottom: 15px;
   border-bottom: 2px solid black;
 }
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: black;
-}
+
 
 .navbar-default {
   border: 0px;
@@ -20,14 +35,28 @@
 .navbar .container-fluid,
 .navbar .navbar-collapse
 {
-  background-color: rgb(248, 248, 248);
+  background-color: 	rgba(245, 132, 33, .87);
   padding: 0;
 }
-li.active{
-  background-color: rgb(231, 231, 231);
+.box-shader
+{
+box-shadow:10px 15px 0px rgba(0,0,0,.1);
 }
-li.active.inner{
-  background-color: rgb(221, 221, 221);
+li.active{
+  background-color: 	#ff9300;
+}
+.nav li a:hover{
+  background-color: #fbf23d;
+}
+#myNavbar > ul > li.active > ul > li.active.inner{
+  background-color: #ffa934;
+}
+body > div > div.col-xs-12.col-sm-9.content > div > div > div.table-container > table > tbody{
+  background: #ffe2ba;
+}
+body > div > div.col-xs-12.col-sm-9.content > div > div > div.table-container > table > tbody > tr >td{
+  border-color: #f58625 !important;
+
 }
 ul.padder{
   padding-left:10px;
@@ -46,4 +75,114 @@ ul.padder{
 .pad15{
   margin-left:15px;
   margin-right:15px;
+}
+
+.header-login {
+  font-family: header;
+  font-weight: 200;
+  font-size: 3.5em;
+  color: #fff;
+  text-align: center;
+}
+
+.navbar {
+  border-radius: 0;
+  border: 0;
+}
+.field-label {
+  font-size: 1.2em;
+  font-family: HelveticaNeue-Light;
+  text-align: left;
+  font-weight: 100;
+  color: #fff;
+  margin-bottom: .5em;
+}
+.btn.btn-default{
+  background-color:
+}
+.btn-login{
+  color: rgba(255, 255, 255, 1);
+  width: 6em;
+  font-family: HelveticaNeue-Bold;
+  font-weight: 100;
+  font-size: 1.75em;
+  border: 1px solid rgba(255, 255, 255, .75);
+  background: transparent;
+  border-radius: .65em;
+}
+.nav>li>a{
+  color: white;
+}
+body > div > div.col-xs-12.col-sm-3 > nav{
+  background-color:rgba(0,0,0,0);
+}
+.link-styler{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:0px;
+}
+.because-desperation-thats-why{
+  color: transparent !important;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable > div.ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle{
+  background-color: firebrick;
+  color: white;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable{
+  font-family: HelveticaNeue-light;
+}
+body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button{
+  border-radius:8px;
+  background-color: grey;
+  box-shadow: 0px;
+  border:0;
+  color: white;
+
+}
+body > div > nav.topnav-styler{
+  background-color: transparent;
+}
+body > div > nav > div{
+border-radius:0px;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  background-color: rgba(245, 132, 33, .87);
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+  margin-left: 10px;
+}
+body > nav > div > ul.nav.navbar-nav.navbar-right{
+
+    margin-right: 10px;
+    padding-right: 15px;
+
+}
+body > nav > div.container-fluid.topnav-styler a{
+  color: white !important;
+
+}
+nav.topnav-styler{
+  box-shadow:0px 7px 0px rgba(0,0,0,.1);
+}
+body > nav > div > div > a.navbar-brand{
+  font-family: Header;
+  font-size:2em;
+
+}
+.content{
+  box-shadow:10px 15px 0px rgba(0,0,0,.1);
+  background-color: #f9e988;
+  padding-bottom: 20px;
+
+}
+.table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active{
+  background: rgba(245, 132, 33, .87);
+  color: white;
+  border-color: #f58625 !important;
+}
+.input-part{
+  border-top:1px solid rgba(245, 132, 33, .87);
+}
+body.login-page{
+  background: rgba(245, 132, 33, .87);
 }
