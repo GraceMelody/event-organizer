@@ -40,15 +40,19 @@
 
   if (isset($_POST['submit'])) {
     // Tambah event
-    $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
-
-    $stmt = $db->prepare($query) or die($db->error);
-    $true_bool = true;
-    $entry_honor_val = isset($_POST['entry-honor']) ? 1 : 0;
-    $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
-    $admin_val = isset($_POST['admin']) ? 1 : 0;
-    $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
-    $stmt->execute() or show_error_dialog($db->error);
+    if (empty($_POST['nip']) || empty($_POST['id_posisi'] || empty($_POST['email']) || empty($_POST['hp']) || empty($_POST['rekening']))) {
+       show_error_dialog("Semua field harus diisi!");
+     } else {
+       $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
+ 
+       $stmt = $db->prepare($query) or die($db->error);
+       $true_bool = true;
+       $entry_honor_val = isset($_POST['entry-honor']) ? 1 : 0;
+       $koordinator_val = isset($_POST['koordinator']) ? 1 : 0;
+       $admin_val = isset($_POST['admin']) ? 1 : 0;
+       $stmt->bind_param("isisiiiiiii", $_POST['nip'], $_POST['nama'], $_POST['id_posisi'], $_POST['email'], $_POST['hp'], $_POST['rekening'], $entry_honor_val, $koordinator_val, $admin_val, $true_bool, getNIP());
+       $stmt->execute() or show_error_dialog("NIP yang dimasukkan sudah terdaftar");
+     }
   }
 
   function populateTable() {
