@@ -28,7 +28,7 @@
 
     $stmt = $db->prepare($query) or die($db->error);
     $stmt->bind_param("iisii", $_POST['id_event'], $_POST['id_personal'], $_POST['event_date'], getNIP(), $_POST['id_personal']);
-    $stmt->execute() or show_error_dialog($db->error);
+    $stmt->execute() or show_error_dialog("Semua field harus diisi");
   }
 
   function populateTable() {
