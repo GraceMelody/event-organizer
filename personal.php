@@ -40,7 +40,7 @@
 
   if (isset($_POST['submit'])) {
     // Tambah event
-    if (empty($_POST['nip']) || empty($_POST['id_posisi'] || empty($_POST['email']) || empty($_POST['hp']) || empty($_POST['rekening']))) {
+    if (empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['id_posisi'] || empty($_POST['email']) || empty($_POST['hp']) || empty($_POST['rekening']))) {
        show_error_dialog("Semua field harus diisi!");
      } else {
        $query = "INSERT INTO personal (nip, nama, id_posisi, email, hp, rekening, entry_honor, koordinator, admin, aktif, entry_user) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
