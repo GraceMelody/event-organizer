@@ -15,7 +15,14 @@
     echo $_POST['id'];
     die();
   }
-
+  if (isset($_POST['deleteHonor'])) {
+    $query = "UPDATE honor SET delete_time=NOW(), delete_user=? WHERE id=?";
+    $stmt = $db->prepare($query) or show_error_dialog($db->error);
+    $stmt->bind_param("ii", getNIP(), $_POST['id']);
+    $stmt->execute();
+    die();
+  }
+  
   if (isset($_POST['submit'])) {
     // Tambah event
 
@@ -49,6 +56,7 @@
                   WHERE id_wilayah=?
                   AND id_event=?
                   AND DATE(tanggal_event) = ?
+                  AND delete_time IS NULL
                   ";
       $stmt = $db->prepare($query) or show_error_dialog($db->error);
       $stmt->bind_param('iis',$_GET['id_wilayah'], $_GET['id_event'], $_GET['event_date']);
@@ -65,7 +73,7 @@
            <td><?php echo $id ?></td>
            <td><?php echo $nama_personal ?></td>
            <td><?php echo $posisi ?></td>
-           <td><button type="button" class="btn btn-danger">Hapus</button></td>
+           <td><button type="button" class="btn btn-danger" onclick="showDeleteConf(<?php echo $id ?>)">Hapus</button></td>
          </tr>
     <?php
     }
@@ -195,6 +203,30 @@
     })
 
   })
+  
+  function showDeleteConf (id) {
+    $("body").append("<div id='close-dialog'>Yakin hapus?<div>");
+    $("#close-dialog").dialog({
+      modal: true,
+      title: "Error",
+      buttons: {
+        Ya: function() {
+          $.post('entry-honor.php',{
+            id: id,
+            deleteHonor: 1
+          }, function() {
+            // When done
+            location.reload()
+          })
+          
+          
+        },
+        Tidak: function() {
+          $(this).dialog("close");
+        }
+      }
+    });
+  }
 </script>
               <?php if (canEditMaster()) { ?>
               <li>

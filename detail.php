@@ -26,7 +26,7 @@
     INNER JOIN posisi ON honor.id_posisi = posisi.id
     INNER JOIN event ON honor.id_event = event.id
     INNER JOIN wilayah ON event.id_wilayah = wilayah.id
-    WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND  id_personal=?";
+    WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND  id_personal=? AND delete_time IS NULL";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['id_user']);
     $stmt->execute();
@@ -42,7 +42,7 @@
     INNER JOIN posisi ON honor.id_posisi = posisi.id
     INNER JOIN event ON honor.id_event = event.id
     INNER JOIN wilayah ON event.id_wilayah = wilayah.id
-    WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND  id_personal=?";
+    WHERE DATE(tanggal_event) BETWEEN DATE(?) AND DATE(?) AND  id_personal=? AND delete_time IS NULL";
     $stmt = $db->prepare($query) or show_error_dialog($db->error);
     $stmt->bind_param('ssi', $_GET['begin_date'], $_GET['end_date'], $_GET['id_user']);
     $stmt->execute();
